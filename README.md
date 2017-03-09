@@ -43,7 +43,7 @@ This is the example application itself. It is made of a single source file that 
 
 The *ChainExpander* application also implements utility methods that are used to dispatch the *OmmConsumer* in different situations: until a chain is complete, until the user presses *\<Enter>* or until a certain amount of time is elapsed.
 
-***Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).*
+**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).*
 
 ## <a id="demonstrated-features"></a>Demonstrated features
 The Chain Expander application demonstrates the following features of the EMA Chain Toolkit:
