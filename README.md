@@ -60,7 +60,7 @@ The Chain Expander application demonstrates the following features of the EMA Ch
 * **Step 10:** Opens a chain that doesn’t exit. Leverages the *ChainErrorFunction* functional interface to catch and display the error.
 
 ## <a id="using-the-ema-chain-toolkit"></a>Using the EMA Chain Toolkit
-For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2]() article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/article/elektron-article-2). 
+For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit javadoc. 
 
 ## <a id="building-the-chainexpander"></a>Building the ChainExpander
 
