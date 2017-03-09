@@ -23,7 +23,7 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easly reusable in your own source code application.
+The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easly reusable in your own source code application.
 
 ## <a id="prerequisites"></a>Prerequisites
 
@@ -36,14 +36,14 @@ Required software components:
 The source code of this example application has been designed for easy reuse. It is made of two distinct parts:
 
 ### The EMA Chain Toolkit
-This is a reusable module that implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/platform-services-work-progress/ema/docs?content=12021&type=documentation_item) article. These features have been isolated in the EMA Chain Toolkit contained in the *com.thomsonreuters.platformservices.ema.utils.chain* package. The source code of this package is available in GitHub and ready for reuse. It can be integrated in your application project as is. The toolkit also comes with a Javadoc that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
+This is a reusable module that implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit contained in the *com.thomsonreuters.platformservices.ema.utils.chain* package. The source code of this package is available in GitHub and ready for reuse. It can be integrated in your application project as is. The toolkit also comes with a Javadoc that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
 
 ### The ChainExpander
 This is the example application itself. It is made of a single source file that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA *OmmConsumer* and uses it with the toolkit to expand different kind of chains. Chains are expanded one by one in 10 individual steps. Before each step an explanatory text is displayed and you are prompted to press *\<Enter>* to start the step.
 
 The *ChainExpander* application also implements utility methods that are used to dispatch the *OmmConsumer* in different situations: until a chain is complete, until the user presses *\<Enter>* or until a certain amount of time is elapsed.
 
-**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).*
+**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
 
 ## <a id="demonstrated-features"></a>Demonstrated features
 The Chain Expander application demonstrates the following features of the EMA Chain Toolkit:
