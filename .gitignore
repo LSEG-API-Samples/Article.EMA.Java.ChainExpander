@@ -1,0 +1,5 @@
+*.class
+/ema.log.*
+/build/
+/dist/
+/nbproject/private/
