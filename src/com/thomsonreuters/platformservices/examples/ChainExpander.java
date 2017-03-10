@@ -21,7 +21,7 @@ class ChainExpander
     // appropriate service name to be used in your environment
     private static final String serviceName = "IDN_RDF";
     
-    // If the Open Data Access Control System (DACS) is activated on your TREP 
+    // If the Data Access Control System (DACS) is activated on your TREP 
     // and if your DACS username is different than your operating system user 
     // name, you may need to hardcode your DACS user name in this application.
     // To do so, you just have to set it in the following field. 
