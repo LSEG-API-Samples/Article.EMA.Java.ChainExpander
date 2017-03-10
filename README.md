@@ -23,7 +23,7 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easly reusable in your own source code application.
+The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easily reusable in your own source code application.
 
 ## <a id="prerequisites"></a>Prerequisites
 
@@ -70,7 +70,7 @@ This package includes some convenient files which will enable the developer to q
 
 If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you may need to hardcode it in the application. To do so, you just need to edit the *ChainExpande.java* file and, at row 30, set the *dacsUserName* field to your DACS user name.
 
-Once these environment variables setup and the DACS user name optionnaly set in the source code, you must run the *build.bat* or the *build.ksh* script to build the application.
+Once these environment variables setup and the DACS user name optionally set in the source code, you must run the *build.bat* or the *build.ksh* script to build the application.
 
 **Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the *ChainExpander*. NetBeans 8.2 project files are provided with the source code of the application.    
 
@@ -484,7 +484,7 @@ This is an example of the ChainExpander output for each step:
 
     The system cannot find the path specified
 
-**A:** The JAVA_HOME environment variable is not set, or set to the wrong path. See [Building the ChainExpander](#building-the-chainexpander) section above.
+**A:** The JAVA_HOME environment variable is not set, or set to the wrong path. See the [Building the ChainExpander](#building-the-chainexpander) section above.
 
 <br>
 
@@ -506,7 +506,7 @@ This is an example of the ChainExpander output for each step:
     src\com\thomsonreuters\platformservices\ema\utils\chain\ChainRecord.java:7: error: package com.thomsonreuters.ema.access does not exist
     import com.thomsonreuters.ema.access.EmaFactory;
                                     ^
-**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path.  See [Building the ChainExpander](#building-the-chainexpander) section above.
+**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path.  See the [Building the ChainExpander](#building-the-chainexpander) section above.
 
 <br>
 
@@ -530,7 +530,7 @@ This is an example of the ChainExpander output for each step:
             at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
             ... 7 more
 
-**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path.  See [Building the ChainExpander](#building-the-chainexpander) section above.
+**A:** The ELEKTRON_JAVA_HOME environment variable is not set, or set to the wrong path. See the [Building the ChainExpander](#building-the-chainexpander) section above.
 
 <br>
 
