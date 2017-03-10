@@ -21,7 +21,7 @@
 			<GuaranteedOutputBuffers value="5000"/>
 			<ConnectionPingTimeout value="30000"/>
 			<TcpNodelay value="1"/>
-			<Host value="10.2.43.49"/>
+			<Host value="YOUR_TREPADS_OR_ELEKTRON_IP_OR_HOSTNAME"/>
 			<Port value="14002"/>
 			<XmlTraceToStdout value="0"/>
 		</Channel>
