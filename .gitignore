@@ -1,5 +1,8 @@
 *.class
 /emaj.log.*
-/build/
-/dist/
+/build/*
+/dist/*
+!/dist/javadoc
 /nbproject/private/
+
+https://developers.thomsonreuters.com/sites/default/files/inline/images/01%20-%20DownJonesChain_0.jpg
