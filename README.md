@@ -36,7 +36,7 @@ Required software components:
 The source code of this example application has been designed for easy reuse. It is made of two distinct parts:
 
 ### The EMA Chain Toolkit
-This is a reusable module that implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit contained in the *com.thomsonreuters.platformservices.ema.utils.chain* package. The source code of this package is available in GitHub and ready for reuse. It can be integrated in your application project as is. The toolkit also comes with a Javadoc that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
+This is a reusable module that implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit contained in the *com.thomsonreuters.platformservices.ema.utils.chain* package. The source code of this package can be integrated in your application project as is. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
 
 ### The ChainExpander
 This is the example application itself. It is made of a single source file that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA *OmmConsumer* and uses it with the toolkit to expand different kind of chains. Chains are expanded one by one in 10 individual steps. Before each step an explanatory text is displayed and you are prompted to press *\<Enter>* to start the step.
@@ -60,7 +60,7 @@ The Chain Expander application demonstrates the following features of the EMA Ch
 * **Step 10:** Opens a chain that doesn’t exit. Leverages the *ChainErrorFunction* functional interface to catch and display the error.
 
 ## <a id="using-the-ema-chain-toolkit"></a>Using the EMA Chain Toolkit
-For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit javadoc. 
+For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
 
 ## <a id="building-the-chainexpander"></a>Building the ChainExpander
 
