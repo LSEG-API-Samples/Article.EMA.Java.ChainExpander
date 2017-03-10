@@ -19,7 +19,7 @@ class ChainExpander
     // TREP or Elektron Service name used request chains and tiles
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
-    private static final String serviceName = "IDN_RDF";
+    private static final String serviceName = "ELEKTRON_AD";
     
     // If the Data Access Control System (DACS) is activated on your TREP 
     // and if your DACS username is different than your operating system user 
@@ -201,7 +201,7 @@ class ChainExpander
         System.out.println("  . 4/10 - openAChainAndSkipSummaryLinks()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain once again, but this time we skip");
-        System.out.println("  . the summary links. As the Dow Jones chain as one summary link, the chain ");
+        System.out.println("  . the summary links. As the Dow Jones chain has one summary link, the chain ");
         System.out.println("  . will be made of 30 elements instead of 31. The number of summary links may");
         System.out.println("  . be different for other chains and depends on the display template used by");
         System.out.println("  . the chain. For example, it's 2 for the British FTSE 100 (0#.FTSE), 6 for");
@@ -352,7 +352,7 @@ class ChainExpander
         System.out.println("  . record that doesn't start by \"0#\". This example leverages the");
         System.out.println("  . onElementAdded, onElementChanged and onElementsRemoved functional");
         System.out.println("  . interfaces to display chain changes. For this step, EMA events are");
-        System.out.println("  . displayed for 2 minutes. After this time the chain is close and the step");
+        System.out.println("  . displayed for 2 minutes. After this time the chain is closed and the step");
         System.out.println("  . terminates. If this step is executed when the NYSE is opened, you should");
         System.out.println("  . observe changes in the chain.");
         System.out.println();              
