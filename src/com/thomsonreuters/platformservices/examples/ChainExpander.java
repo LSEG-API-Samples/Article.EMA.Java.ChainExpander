@@ -267,7 +267,7 @@ class ChainExpander
                         (position, name, chain) -> 
                         {
                             if(position % 100 == 0)
-                                System.out.println("\t" + (position+1) + " elements decoded for <" + chain.getName() + ">. Latest: " + name);
+                                System.out.println("\t" + (position+1) + " element(s) decoded for <" + chain.getName() + ">. Latest: " + name);
                         }
                 )
                 .onChainComplete(
@@ -315,7 +315,7 @@ class ChainExpander
                         (position, name, chain) -> 
                         {
                             if(position % 100 == 0)
-                                System.out.println("\t" + (position+1) + " elements decoded for <" + chain.getName() + ">. Latest: " + name);
+                                System.out.println("\t" + (position+1) + " element(s) decoded for <" + chain.getName() + ">. Latest: " + name);
                         }
                 )
                 .onChainComplete(
@@ -563,7 +563,7 @@ class ChainExpander
 
     private static void dispatchEventsUntilTheChainIsComplete(Chain chain)
     {
-        System.out.println("    >>> Dispathing events until the chain is complete or in error");
+        System.out.println("    >>> Dispatching events until the chain is complete or in error");
 
         try
         {
@@ -583,7 +583,7 @@ class ChainExpander
     
     private static void dispatchEventsFor(int durationInSeconds)
     {                
-        System.out.println("    >>> Dispathing events for " + durationInSeconds + " seconds");
+        System.out.println("    >>> Dispatching events for " + durationInSeconds + " seconds");
             
         try
         {
