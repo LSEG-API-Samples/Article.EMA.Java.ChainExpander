@@ -1,5 +1,5 @@
 *.class
-/ema.log.*
+/emaj.log.*
 /build/
 /dist/
 /nbproject/private/
