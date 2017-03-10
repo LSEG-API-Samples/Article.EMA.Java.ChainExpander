@@ -13,6 +13,7 @@ if [ ! -d $BINDIR ]; then
 fi
 
 JAVAC=$JAVA_HOME/bin/javac
+JAVADOC=$JAVA_HOME/bin/javadoc
 EMA_HOME=$ELEKTRON_JAVA_HOME/Ema
 ETA_HOME=$ELEKTRON_JAVA_HOME/Eta
 
@@ -20,14 +21,21 @@ CLASSPATH=./src:$EMA_HOME/Libs/ema.jar:$EMA_HOME/Libs/SLF4J/slf4j-1.7.12/slf4j-a
 
 function build
 {
-   printf "Building the Chain Expander example...\n"
-
+   printf "Building the EMA Chain Toolkit...\n"
    $JAVAC -d $BINDIR src/com/thomsonreuters/platformservices/ema/utils/chain/*.java; ret=$?
    if [ $ret != 0 ]; then
       printf "Build failed.  Exiting\n"
       exit $ret
    fi
 
+   printf "Building the EMA Chain Toolkit javadoc...\n"
+   $JAVADOC -d $JAVADOCDIR -quiet -sourcepath src com.thomsonreuters.platformservices.ema.utils.chain; ret=$?
+   if [ $ret != 0 ]; then
+      printf "Build failed.  Exiting\n"
+      exit $ret
+   fi
+
+   printf "Building the Chain Expander example...\n"
    $JAVAC -d $BINDIR src/com/thomsonreuters/platformservices/examples/*.java; ret=$?
    if [ $ret != 0 ]; then
       printf "Build failed.  Exiting\n"
