@@ -64,13 +64,22 @@ For more details about the EMA Chain Toolkit usage, please refer to the [Decodin
 
 ## <a id="building-the-chainexpander"></a>Building the ChainExpander
 
+### Set the required environment variables
+
 This package includes some convenient files which will enable the developer to quickly build and run the example application. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables. These variables must be set appropriately before you run any of the *build* or *run* scripts.
 * *JAVA_HOME* must be set with the root directory of your JDK 8 environment.
 * *ELEKTRON_JAVA_HOME* must be set with the root directory of your (EMA) Elektron Java API installation
 
-If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you may need to hardcode it in the application. To do so, you just need to edit the *ChainExpande.java* file and, at row 30, set the *dacsUserName* field to your DACS user name.
+### Change the service name and DACS user name if need be
 
-Once these environment variables setup and the DACS user name optionally set in the source code, you must run the *build.bat* or the *build.ksh* script to build the application.
+The *ChainExpander.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
+
+* The **service name** used to subscribe to chains records: The hardcoded value is "IDN_RDF". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
+* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *ChainExpander.dacsUserName* field at line 30 of *ChainExpander.java*.
+
+### Run the *build* script
+
+Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the application.
 
 **Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the *ChainExpander*. NetBeans 8.2 project files are provided with the source code of the application.    
 
