@@ -10,21 +10,30 @@ rem
 
 set SCRIPT=%0
 set BINDIR=build\classes
+set JAVADOCDIR=dist\javadoc
 set "EMA_HOME=%ELEKTRON_JAVA_HOME%\Ema"
 set "ETA_HOME=%ELEKTRON_JAVA_HOME%\Eta"
 
 rem Java Compiler.  Default compiler in path.
 set JAVAC="%JAVA_HOME%\bin\javac"
+set JAVADOC="%JAVA_HOME%\bin\javadoc"
+
+
 
 set CLASSPATH=%BINDIR%;%EMA_HOME%\Libs\ema.jar;%EMA_HOME%\Libs\SLF4J\slf4j-1.7.12\slf4j-api-1.7.12.jar;%EMA_HOME%\Libs\SLF4J\slf4j-1.7.12\slf4j-jdk14-1.7.12.jar;%EMA_HOME%\Libs\apache\commons-configuration-1.10.jar;%EMA_HOME%\Libs\apache\commons-logging-1.2.jar;%EMA_HOME%\Libs\apache\commons-lang-2.6.jar;%EMA_HOME%\Libs\apache\org.apache.commons.collections.jar;%ETA_HOME%\Libs\upa.jar;%ETA_HOME%\Libs\upaValueAdd.jar
 
 if not exist %BINDIR% (mkdir %BINDIR%)
 
-echo Building the Chain Expander example...
-
+echo Building the EMA Chain Toolkit...
 %JAVAC% -d %BINDIR% src\com\thomsonreuters\platformservices\ema\utils\chain\*.java
 if %errorlevel% neq 0 goto :ERROR
 
+echo Building the EMA Chain Toolkit javadoc...
+%JAVADOC% -d %JAVADOCDIR% -quiet -sourcepath src com.thomsonreuters.platformservices.ema.utils.chain
+if %errorlevel% neq 0 goto :ERROR
+
+
+echo Building the Chain Expander example...
 %JAVAC% -d %BINDIR% src\com\thomsonreuters\platformservices\examples\*.java
 if %errorlevel% neq 0 goto :ERROR
 
