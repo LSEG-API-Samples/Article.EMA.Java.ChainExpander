@@ -46,7 +46,7 @@ The *ChainExpander* application also implements utility methods that are used to
 **Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
 
 ## <a id="demonstrated-features"></a>Demonstrated features
-The Chain Expander application demonstrates the following features of the EMA Chain Toolkit:
+The Chain Expander application demonstrates the following *EMA Chain Toolkit* features:
 
 * **Step 1:** Builds and opens the Dow Jones chain (0#.DJI). Waits for the chain to complete using the *isComplete()* method. Gets and display the chain elements.
 * **Step 2:** Builds and opens the Dow Jones chain. Leverages the *ChainCompleteFunction* functional interface to wait for completion, to get the chain elements and to display them.
