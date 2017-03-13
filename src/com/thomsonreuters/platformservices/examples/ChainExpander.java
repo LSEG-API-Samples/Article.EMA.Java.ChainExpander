@@ -352,8 +352,10 @@ class ChainExpander
         System.out.println("  . record that doesn't start by \"0#\". This example leverages the");
         System.out.println("  . onElementAdded, onElementChanged and onElementsRemoved functional");
         System.out.println("  . interfaces to display chain changes. For this step, EMA events are");
-        System.out.println("  . displayed for 2 minutes. After this time the chain is closed and the step");
-        System.out.println("  . terminates. If this step is executed when the NYSE is opened, you should");
+        System.out.println("  . displayed for 2 minutes. In order to help you visualizing the changes that");
+        System.out.println("  . happened to the chain, the complete list of chain elements is displayed");
+        System.out.println("  . when the chain is complete and just before it is closed, after the 2");
+        System.out.println("  . minutes wait. If this step is executed when the NYSE is opened, you should");
         System.out.println("  . observe changes in the chain.");
         System.out.println();              
         pressAnyKeyToContinue();
@@ -364,24 +366,35 @@ class ChainExpander
                 .withServiceName(serviceName)
                 .withUpdates(true)
                 .onElementAdded(
-                        (position, name, chain) -> 
-                                System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
+                    (position, name, chain) -> 
+                        System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
                 )
                 
                 .onElementRemoved(
-                        (position, chain) -> 
-                                System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position)
+                    (position, chain) -> 
+                        System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position)
                 )
                 .onElementChanged(
-                        (position, previousName, newName, chain) -> 
-                        {
-                                System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
-                                System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);
-                        }
+                    (position, previousName, newName, chain) -> 
+                    {
+                        System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
+                        System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);
+                    }
                 )               
+                .onChainComplete(
+                    (chain) -> 
+                    {
+                        System.out.println("\n\tThe chain is complete and contains the following elements:");
+                        chain.getElements().forEach(
+                            (position, name) -> 
+                                System.out.println("\t\t" + chain.getName() + "[" + position + "] = " + name)
+                        );
+                        System.out.println("\tWaiting for updates...\n");
+                    }
+                )                
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    (errorMessage, chain) -> 
+                        System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
                 )
                 .build();
         
@@ -389,6 +402,15 @@ class ChainExpander
         theChain.open();                                    
         
         dispatchEventsFor(TWO_MINUTES);
+        
+        {// Prints the chain after 2 minutes
+            System.out.println("\n\tThe chain is about to be closed. It now contains the following elements:");
+            theChain.getElements().forEach(
+                (position, name) -> 
+                    System.out.println("\t\t" + theChain.getName() + "[" + position + "] = " + name)
+            );
+            System.out.println();
+        }        
         
         System.out.println("    >>> Closing <" + theChain.getName() + ">");
         theChain.close();        

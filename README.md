@@ -74,7 +74,7 @@ This package includes some convenient files which will enable the developer to q
 
 The *ChainExpander.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
 
-* The **service name** used to subscribe to chains records: The hardcoded value is "IDN_RDF". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
+* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_AD". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
 * The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *ChainExpander.dacsUserName* field at line 30 of *ChainExpander.java*.
 
 ### Run the *build* script
@@ -341,7 +341,7 @@ This is an example of the ChainExpander output for each step:
             Chain <0#UNIVERSE.NB> contains 8436 elements and opened in 1 seconds.
         >>> Closing <0#UNIVERSE.NB>
 
-            ..............................................................................
+      ..............................................................................
       . 7/10 - openChainWithUpdates()
       ..............................................................................
       . In this step we open the "NYSE Active Volume leaders" tile (.AV.O), this
@@ -350,61 +350,105 @@ This is an example of the ChainExpander output for each step:
       . record that doesn't start by "0#". This example leverages the
       . onElementAdded, onElementChanged and onElementsRemoved functional
       . interfaces to display chain changes. For this step, EMA events are
-      . displayed for 2 minutes. After this time the chain is close and the step
-      . terminates. If this step is executed when the NYSE is opened, you should
+      . displayed for 2 minutes. In order to help you visualizing the changes that
+      . happened to the chain, the complete list of chain elements is displayed
+      . when the chain is complete and just before it is closed, after the 2
+      . minutes wait. If this step is executed when the NYSE is opened, you should
       . observe changes in the chain.
 
         <<< Press <Enter> to continue...
-        >>> Opening <.AV.O>
-        >>> Dispathing events for 120 seconds
-            Element added to <.AV.O> at position 0: GLBL.O
-            Element added to <.AV.O> at position 1: MOMO.O
-            Element added to <.AV.O> at position 2: AMD.O
-            Element added to <.AV.O> at position 3: DISH.O
-            Element added to <.AV.O> at position 4: TGTX.O
-            Element added to <.AV.O> at position 5: MEET.O
-            Element added to <.AV.O> at position 6: DRYS.O
-            Element added to <.AV.O> at position 7: AUPH.O
-            Element added to <.AV.O> at position 8: ETRM.O
-            Element added to <.AV.O> at position 9: XIV.O
-            Element added to <.AV.O> at position 10: TVIX.O
-            Element added to <.AV.O> at position 11: PERI.O
-            Element added to <.AV.O> at position 12: MYL.O
-            Element added to <.AV.O> at position 13: ASNA.O
-            Element added to <.AV.O> at position 14: OPK.O
-            Element added to <.AV.O> at position 15: FTR.O
-            Element added to <.AV.O> at position 16: HPJ.O
-            Element added to <.AV.O> at position 17: WKHS.O
-            Element added to <.AV.O> at position 18: MU.O
-            Element added to <.AV.O> at position 19: QQQ.O
-            Element added to <.AV.O> at position 20: AAPL.O
-            Element added to <.AV.O> at position 21: IBB.O
-            Element added to <.AV.O> at position 22: SQQQ.O
-            Element added to <.AV.O> at position 23: SIRI.O
-            Element added to <.AV.O> at position 24: LOGI.O
-            Element changed in <.AV.O> at position 11
-                Previous name: PERI.O New name: MYL.O
-            Element changed in <.AV.O> at position 12
-                Previous name: MYL.O New name: PERI.O
-            Element changed in <.AV.O> at position 15
-                Previous name: FTR.O New name: QQQ.O
-            Element changed in <.AV.O> at position 16
-                Previous name: HPJ.O New name: FTR.O
-            Element changed in <.AV.O> at position 17
-                Previous name: WKHS.O New name: HPJ.O
-                .
-                .
-                .
-            Element changed in <.AV.O> at position 18
-                Previous name: HPJ.O New name: IBB.O
-            Element changed in <.AV.O> at position 17
-                Previous name: HPJ.O New name: IBB.O
-            Element changed in <.AV.O> at position 18
-                Previous name: IBB.O New name: HPJ.O
-        >>> Closing <.AV.O>
 
-      ..............................................................................
-      >>> Creating the OmmConsumer
+        >>> Opening <.AV.O>
+        >>> Dispatching events for 120 seconds
+        Element added to <.AV.O> at position 0: AMD.O
+        Element added to <.AV.O> at position 1: QQQ.O
+        Element added to <.AV.O> at position 2: FNSR.O
+        Element added to <.AV.O> at position 3: INTC.O
+        Element added to <.AV.O> at position 4: DRYS.O
+        Element added to <.AV.O> at position 5: USLV.O
+        Element added to <.AV.O> at position 6: TVIX.O
+        Element added to <.AV.O> at position 7: FB.O
+        Element added to <.AV.O> at position 8: NVDA.O
+        Element added to <.AV.O> at position 9: OCRX.O
+        Element added to <.AV.O> at position 10: OPK.O
+        Element added to <.AV.O> at position 11: AUPH.O
+        Element added to <.AV.O> at position 12: TSLA.O
+        Element added to <.AV.O> at position 13: CERU.O
+        Element added to <.AV.O> at position 14: RADA.O
+        Element added to <.AV.O> at position 15: VCEL.O
+        Element added to <.AV.O> at position 16: SRRA.O
+        Element added to <.AV.O> at position 17: CERC.O
+        Element added to <.AV.O> at position 18: GNMX.O
+        Element added to <.AV.O> at position 19: PAAS.O
+        Element added to <.AV.O> at position 20: ZSAN.O
+        Element added to <.AV.O> at position 21: MYL.O
+        Element added to <.AV.O> at position 22: UGLD.O
+        Element added to <.AV.O> at position 23: GOLD.O
+        Element added to <.AV.O> at position 24: AAPL.O
+
+        The chain is complete and contains the following elements:
+            .AV.O[0] = AMD.O
+            .AV.O[1] = QQQ.O
+            .AV.O[2] = FNSR.O
+            .AV.O[3] = INTC.O
+            .AV.O[4] = DRYS.O
+            .AV.O[5] = USLV.O
+            .AV.O[6] = TVIX.O
+            .AV.O[7] = FB.O
+            .AV.O[8] = NVDA.O
+            .AV.O[9] = OCRX.O
+            .AV.O[10] = OPK.O
+            .AV.O[11] = AUPH.O
+            .AV.O[12] = TSLA.O
+            .AV.O[13] = CERU.O
+            .AV.O[14] = RADA.O
+            .AV.O[15] = VCEL.O
+            .AV.O[16] = SRRA.O
+            .AV.O[17] = CERC.O
+            .AV.O[18] = GNMX.O
+            .AV.O[19] = PAAS.O
+            .AV.O[20] = ZSAN.O
+            .AV.O[21] = MYL.O
+            .AV.O[22] = UGLD.O
+            .AV.O[23] = GOLD.O
+            .AV.O[24] = AAPL.O
+        Waiting for updates...
+
+        Element changed in <.AV.O> at position 1
+            Previous name: QQQ.O New name: INTC.O
+        Element changed in <.AV.O> at position 2
+            Previous name: FNSR.O New name: QQQ.O
+        Element changed in <.AV.O> at position 3
+            Previous name: INTC.O New name: FNSR.O
+
+        The chain is about to be closed. It now contains the following elements:
+            .AV.O[0] = AMD.O
+            .AV.O[1] = INTC.O
+            .AV.O[2] = QQQ.O
+            .AV.O[3] = FNSR.O
+            .AV.O[4] = DRYS.O
+            .AV.O[5] = USLV.O
+            .AV.O[6] = TVIX.O
+            .AV.O[7] = FB.O
+            .AV.O[8] = NVDA.O
+            .AV.O[9] = OCRX.O
+            .AV.O[10] = OPK.O
+            .AV.O[11] = AUPH.O
+            .AV.O[12] = TSLA.O
+            .AV.O[13] = CERU.O
+            .AV.O[14] = RADA.O
+            .AV.O[15] = VCEL.O
+            .AV.O[16] = SRRA.O
+            .AV.O[17] = CERC.O
+            .AV.O[18] = GNMX.O
+            .AV.O[19] = PAAS.O
+            .AV.O[20] = ZSAN.O
+            .AV.O[21] = MYL.O
+            .AV.O[22] = UGLD.O
+            .AV.O[23] = GOLD.O
+            .AV.O[24] = AAPL.O
+
+        >>> Closing <.AV.O>
 
       ..............................................................................
       . 8/10 - openARecursiveChain()
