@@ -74,7 +74,7 @@ This package includes some convenient files which will enable the developer to q
 
 The *ChainExpander.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
 
-* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_AD". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
+* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
 * The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *ChainExpander.dacsUserName* field at line 30 of *ChainExpander.java*.
 
 ### Run the *build* script

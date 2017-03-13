@@ -19,7 +19,7 @@ class ChainExpander
     // TREP or Elektron Service name used request chains and tiles
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
-    private static final String serviceName = "ELEKTRON_AD";
+    private static final String serviceName = "ELEKTRON_DD";
     
     // If the Data Access Control System (DACS) is activated on your TREP 
     // and if your DACS username is different than your operating system user 
