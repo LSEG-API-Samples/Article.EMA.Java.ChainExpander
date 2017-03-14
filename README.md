@@ -119,8 +119,11 @@ This is an example of the ChainExpander output for each step:
       . 1/10 - openAChainAndDisplayElementNamesWhenFinished_1()
       ..............................................................................
       . In this step we open the Dow Jones chain. When the chain decoding is
-      . completed we display the names of all elements names that constitute this
-      . chain. We also display errors if any.
+      . completed we display the names of all elements that constitute this chain.
+      . We also display errors if any. In order to determine if the chain is
+      . complete we poll the isComplete() method at regular intervals (after each
+      . OMM consumer dispatch). In the next step we will see another technique to
+      . detect chains completion.
 
         <<< Press <Enter> to continue...
 
@@ -162,10 +165,11 @@ This is an example of the ChainExpander output for each step:
       ..............................................................................
       . 2/10 - openAChainAndDisplayElementNamesWhenFinished_2()
       ..............................................................................
-      . In this step we open the same Dow Jones chain and also display its elements
-      . names when the chain is complete. But this time we leverage the
-      . onChainComplete() functional interface to detect when the chain is complete
-      . and to display the elements.
+      . In this step we open the Dow Jones chain and display its elements names
+      . when the chain is complete. This step displays the exact same information
+      . than the previous one, but this time we use another technique to detect the
+      . chain’s completion: we leverage the ChainCompleteFunction that is called as
+      . soon as the chain is complete (no is polling required).
 
         <<< Press <Enter> to continue...
 
@@ -209,7 +213,7 @@ This is an example of the ChainExpander output for each step:
       ..............................................................................
       . In this step we open the Dow Jones chain and display the name of new
       . elements as soon as they are detected by the decoding algorithm. To this
-      . aim we leverage the onElementAdded() functional interface.
+      . aim we leverage the ElementAddedFunction functional interface.
 
         <<< Press <Enter> to continue...
 
@@ -348,13 +352,13 @@ This is an example of the ChainExpander output for each step:
       . type of chain that updates very frequently. Tiles follow the same naming
       . convention than classical chains, except for the name of their first chain
       . record that doesn't start by "0#". This example leverages the
-      . onElementAdded, onElementChanged and onElementsRemoved functional
-      . interfaces to display chain changes. For this step, EMA events are
-      . displayed for 2 minutes. In order to help you visualizing the changes that
-      . happened to the chain, the complete list of chain elements is displayed
-      . when the chain is complete and just before it is closed, after the 2
-      . minutes wait. If this step is executed when the NYSE is opened, you should
-      . observe changes in the chain.
+      . ElementAddedFunction, ElementChangedFunction and ElementRemovedFunction
+      . functional interfaces to display chain changes. For this step, EMA events
+      . are displayed for 2 minutes. In order to help you visualizing the changes
+      . that happened to the chain, the complete list of chain elements is
+      . displayed when the chain is complete and just before it is closed, after
+      . the 2 minutes wait. If this step is executed when the NYSE is opened, you
+      . should observe changes in the chain.
 
         <<< Press <Enter> to continue...
 

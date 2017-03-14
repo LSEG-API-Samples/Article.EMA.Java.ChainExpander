@@ -88,8 +88,11 @@ class ChainExpander
         System.out.println("  . 1/10 - openAChainAndDisplayElementNamesWhenFinished_1()");
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain. When the chain decoding is");
-        System.out.println("  . completed we display the names of all elements names that constitute this");
-        System.out.println("  . chain. We also display errors if any.");
+        System.out.println("  . completed we display the names of all elements that constitute this chain.");
+        System.out.println("  . We also display errors if any. In order to determine if the chain is");
+        System.out.println("  . complete we poll the isComplete() method at regular intervals (after each");
+        System.out.println("  . OMM consumer dispatch). In the next step we will see another technique to");
+        System.out.println("  . detect chains completion.");
         System.out.println();              
         pressAnyKeyToContinue();
                
@@ -125,10 +128,11 @@ class ChainExpander
         System.out.println("  ..............................................................................");
         System.out.println("  . 2/10 - openAChainAndDisplayElementNamesWhenFinished_2()");
         System.out.println("  ..............................................................................");
-        System.out.println("  . In this step we open the same Dow Jones chain and also display its elements");
-        System.out.println("  . names when the chain is complete. But this time we leverage the");       
-        System.out.println("  . onChainComplete() functional interface to detect when the chain is complete");
-        System.out.println("  . and to display the elements.");
+        System.out.println("  . In this step we open the Dow Jones chain and display its elements names");
+        System.out.println("  . when the chain is complete. This step displays the exact same information");
+        System.out.println("  . than the previous one, but this time we use another technique to detect the");
+        System.out.println("  . chain’s completion: we leverage the ChainCompleteFunction that is called as");
+        System.out.println("  . soon as the chain is complete (no is polling required).");
         System.out.println();              
         pressAnyKeyToContinue();
 
@@ -166,7 +170,7 @@ class ChainExpander
         System.out.println("  ..............................................................................");
         System.out.println("  . In this step we open the Dow Jones chain and display the name of new");
         System.out.println("  . elements as soon as they are detected by the decoding algorithm. To this");
-        System.out.println("  . aim we leverage the onElementAdded() functional interface.");
+        System.out.println("  . aim we leverage the ElementAddedFunction functional interface.");
         System.out.println();              
         pressAnyKeyToContinue();
 
@@ -350,13 +354,13 @@ class ChainExpander
         System.out.println("  . type of chain that updates very frequently. Tiles follow the same naming");
         System.out.println("  . convention than classical chains, except for the name of their first chain");
         System.out.println("  . record that doesn't start by \"0#\". This example leverages the");
-        System.out.println("  . onElementAdded, onElementChanged and onElementsRemoved functional");
-        System.out.println("  . interfaces to display chain changes. For this step, EMA events are");
-        System.out.println("  . displayed for 2 minutes. In order to help you visualizing the changes that");
-        System.out.println("  . happened to the chain, the complete list of chain elements is displayed");
-        System.out.println("  . when the chain is complete and just before it is closed, after the 2");
-        System.out.println("  . minutes wait. If this step is executed when the NYSE is opened, you should");
-        System.out.println("  . observe changes in the chain.");
+        System.out.println("  . ElementAddedFunction, ElementChangedFunction and ElementRemovedFunction");
+        System.out.println("  . functional interfaces to display chain changes. For this step, EMA events");
+        System.out.println("  . are displayed for 2 minutes. In order to help you visualizing the changes");
+        System.out.println("  . that happened to the chain, the complete list of chain elements is");
+        System.out.println("  . displayed when the chain is complete and just before it is closed, after");
+        System.out.println("  . the 2 minutes wait. If this step is executed when the NYSE is opened, you");
+        System.out.println("  . should observe changes in the chain.");
         System.out.println();              
         pressAnyKeyToContinue();
 
