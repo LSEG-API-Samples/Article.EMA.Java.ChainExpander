@@ -13,6 +13,7 @@ import java.io.IOException;
 import static java.lang.System.exit;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import org.apache.commons.lang.StringUtils;
 
 class ChainExpander
 {
@@ -370,35 +371,35 @@ class ChainExpander
                 .withServiceName(serviceName)
                 .withUpdates(true)
                 .onElementAdded(
-                    (position, name, chain) -> 
-                        System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
+                        (position, name, chain) ->
+                                System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
                 )
                 
                 .onElementRemoved(
-                    (position, chain) -> 
-                        System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position)
+                        (position, chain) -> 
+                                System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position)
                 )
                 .onElementChanged(
-                    (position, previousName, newName, chain) -> 
-                    {
-                        System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
-                        System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);
-                    }
+                        (position, previousName, newName, chain) -> 
+                        {
+                            System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
+                            System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);
+                        }
                 )               
                 .onChainComplete(
-                    (chain) -> 
-                    {
-                        System.out.println("\n\tThe chain is complete and contains the following elements:");
-                        chain.getElements().forEach(
-                            (position, name) -> 
-                                System.out.println("\t\t" + chain.getName() + "[" + position + "] = " + name)
-                        );
-                        System.out.println("\tWaiting for updates...\n");
-                    }
+                        (chain) -> 
+                        {
+                            System.out.println("\n\tThe chain is complete and contains the following elements:");
+                            chain.getElements().forEach(
+                                    (position, name) ->
+                                            System.out.println("\t\t" + chain.getName() + "[" + position + "] = " + name)
+                            );
+                            System.out.println("\tWaiting for updates...\n");
+                        }
                 )                
                 .onChainError(
-                    (errorMessage, chain) -> 
-                        System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                        (errorMessage, chain) ->
+                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
                 )
                 .build();
         
@@ -410,8 +411,8 @@ class ChainExpander
         {// Prints the chain after 2 minutes
             System.out.println("\n\tThe chain is about to be closed. It now contains the following elements:");
             theChain.getElements().forEach(
-                (position, name) -> 
-                    System.out.println("\t\t" + theChain.getName() + "[" + position + "] = " + name)
+                    (position, name) -> 
+                            System.out.println("\t\t" + theChain.getName() + "[" + position + "] = " + name)
             );
             System.out.println();
         }        
@@ -442,10 +443,13 @@ class ChainExpander
                 .withServiceName(serviceName)
                 .onChainComplete(
                         chain ->
-                            chain.getElements().forEach(
-                                    (position, name) -> 
-                                            System.out.println("\t" + chain.getName() + position + " = " + name)
-                            )
+                                chain.getElements().forEach(
+                                    (position, name) ->
+                                    {
+                                        String tabs = StringUtils.repeat("\t", position.size());
+                                        System.out.println(tabs + chain.getName() + position + " = " + name);
+                                    }
+                                )
                 )
                 .onChainError(
                         (errorMessage, chain) ->  
@@ -486,11 +490,14 @@ class ChainExpander
                 .withMaxDepth(2)
                 .onChainComplete(
                         chain ->
-                            chain.getElements().forEach(
-                                    (position, name) -> 
-                                            System.out.println("\t" + chain.getName() + position + " = " + name)
-                            )
-                    )
+                                chain.getElements().forEach(
+                                    (position, name) ->
+                                    {
+                                        String tabs = StringUtils.repeat("\t", position.size());
+                                        System.out.println(tabs + chain.getName() + position + " = " + name);
+                                    }
+                                )
+                )
                 .onChainError(
                         (errorMessage, chain) ->  
                         {
