@@ -9,11 +9,12 @@
 
 BINDIR=build/classes
 if [ ! -d $BINDIR ]; then
-  mkdir $BINDIR
+  mkdir -p $BINDIR
 fi
 
 JAVAC=$JAVA_HOME/bin/javac
 JAVADOC=$JAVA_HOME/bin/javadoc
+JAVADOCDIR=dist/javadoc
 EMA_HOME=$ELEKTRON_JAVA_HOME/Ema
 ETA_HOME=$ELEKTRON_JAVA_HOME/Eta
 
