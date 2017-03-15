@@ -53,11 +53,15 @@ class ChainRecordFactoryImpl implements ChainRecordFactory, ChainRecordListener
 
         return chainRecord;
     }
-
+    
     @Override
-    public synchronized void release(ChainRecord toRelease)
+    public synchronized void releaseAll()
     {
+        preOpenedChainRecordByName.values().forEach(
+            (chainRecord) -> chainRecord.close()
+        );
         
+        preOpenedChainRecordByName.clear();
     }
     
     private boolean isPreOpened(String name)

@@ -30,6 +30,7 @@ class ChainRecord implements OmmConsumerClient
     private boolean isAChainRecord;
     private Fields fieldsReceivedDuringPreOpening;
     private long subscriptionHandle;
+    private int instrumentStreamState;
     private long firstLinkPosition;
     private long summaryLinksToSkip;
     private ChainRecord nextChainRecord;
@@ -97,8 +98,8 @@ class ChainRecord implements OmmConsumerClient
             return;
 
         state = State.CLOSED;
-        context.getOmmConsumer().unregister(subscriptionHandle);
-                
+        unsubscribe();
+        
         clearImageAndNotifyOfRemovedLinks();
         closeNextChainRecordIfNeeded();
     }
@@ -123,7 +124,6 @@ class ChainRecord implements OmmConsumerClient
         if(nextChainRecord != null)
         {
             nextChainRecord.close();
-            factory.release(nextChainRecord);
             nextChainRecord = null;
         }   
     }
@@ -143,11 +143,26 @@ class ChainRecord implements OmmConsumerClient
                                 .serviceName(context.getServiceName())
                                 .interestAfterRefresh(context.getWithUpdates()),
                         this);
+        instrumentStreamState = OmmState.StreamState.OPEN;
     }
+    
+    private void unsubscribe()
+    {
+        if(instrumentStreamState == OmmState.StreamState.CLOSED ||
+           instrumentStreamState == OmmState.StreamState.CLOSED_RECOVER ||
+           instrumentStreamState == OmmState.StreamState.CLOSED_REDIRECTED)
+        {
+            return;
+        }
+        
+        context.getOmmConsumer().unregister(subscriptionHandle);
+    }    
     
     @Override
     public synchronized void onRefreshMsg(RefreshMsg message, OmmConsumerEvent event)
     {
+        instrumentStreamState = message.state().streamState();
+        
         Payload payload = message.payload();
         if (!isAFieldList(payload) || !isAChainRecord(payload))
         {
@@ -181,6 +196,8 @@ class ChainRecord implements OmmConsumerClient
     {
         if (message.hasState())
         {
+            instrumentStreamState = message.state().streamState();
+                    
             if(message.state().dataState() == OmmState.DataState.SUSPECT)
             {
                 String errorMessage = "Invalid status received for <" + name + ">: " + message.state();

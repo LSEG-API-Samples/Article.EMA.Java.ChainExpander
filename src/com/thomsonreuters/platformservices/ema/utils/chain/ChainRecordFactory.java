@@ -5,5 +5,5 @@ interface ChainRecordFactory
 
     ChainRecord acquire(String name);
 
-    void release(ChainRecord toRelease);
+    void releaseAll();
 }

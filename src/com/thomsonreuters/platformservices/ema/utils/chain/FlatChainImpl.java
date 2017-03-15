@@ -79,12 +79,10 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
         state = State.CLOSING;
         elementsByPosition.clear();
         
-        if (firstChainRecord != null)
-        {
-            firstChainRecord.close();
-            chainRecordFactory.release(firstChainRecord);
-            firstChainRecord = null;
-        }
+        firstChainRecord.close();
+        firstChainRecord = null;
+        
+        chainRecordFactory.releaseAll();
     }
     
     @Override
@@ -101,6 +99,11 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
     @Override
     public synchronized boolean isAChain()
     {
+        if (firstChainRecord == null)
+        {
+            return false;
+        }
+        
         return firstChainRecord.isAChainRecord();
     }
     
