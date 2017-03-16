@@ -13,7 +13,6 @@ import java.io.IOException;
 import static java.lang.System.exit;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import org.apache.commons.lang.StringUtils;
 
 class ChainExpander
 {
@@ -445,10 +444,7 @@ class ChainExpander
                         chain ->
                                 chain.getElements().forEach(
                                     (position, name) ->
-                                    {
-                                        String tabs = StringUtils.repeat("\t", position.size());
-                                        System.out.println(tabs + chain.getName() + position + " = " + name);
-                                    }
+                                        System.out.println("\t" + chain.getName() + position + " = " + name)
                                 )
                 )
                 .onChainError(
@@ -492,10 +488,7 @@ class ChainExpander
                         chain ->
                                 chain.getElements().forEach(
                                     (position, name) ->
-                                    {
-                                        String tabs = StringUtils.repeat("\t", position.size());
-                                        System.out.println(tabs + chain.getName() + position + " = " + name);
-                                    }
+                                        System.out.println("\t" + chain.getName() + position + " = " + name)
                                 )
                 )
                 .onChainError(
