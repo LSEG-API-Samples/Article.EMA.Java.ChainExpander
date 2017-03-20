@@ -19,7 +19,7 @@ class ChainExpander
     // TREP or Elektron Service name used request chains and tiles
     // IMPORTANT NOTE:  You may need to change this value to match the
     // appropriate service name to be used in your environment
-    private static final String serviceName = "ELEKTRON_DD";
+    private static final String SERVICE_NAME = "ELEKTRON_DD";
     
     // If the Data Access Control System (DACS) is activated on your TREP 
     // and if your DACS username is different than your operating system user 
@@ -27,7 +27,7 @@ class ChainExpander
     // To do so, you just have to set it in the following field. 
     // Note: DACS user names are usualy provided by the TREP administration 
     // team of your company. 
-    private static final String dacsUserName = "";
+    private static final String DACS_USER_NAME = "";
 
     // The OmmConsumer used to request the chains
     private static OmmConsumer ommConsumer;
@@ -58,8 +58,8 @@ class ChainExpander
         System.out.println("| .ema.utils.chain package.                                                   |");        
         System.out.println("| The application starts by creating an EMA OmmConsumer and uses it with the  |");
         System.out.println("| toolkit to expand a number of different chains, demonstrating the           |");
-        System.out.println("| implemented capabilities. The chains are expanded one by one in 10          |");
-        System.out.println("| individual steps. For each step an explanatory text is displayed and you    |");
+        System.out.println("| implemented capabilities. Chain examples are expanded one by one in 10      |");
+        System.out.println("| individual steps.  Before each step, explanatory text is displayed and you  |");
         System.out.println("| are prompted to press <Enter> to start the step.                            |");
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println();
@@ -99,7 +99,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#.DJI")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onChainError(
                         (errorMessage, chain) -> 
                                 System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
@@ -139,7 +139,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#.DJI")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onChainComplete(
                         (chain) -> 
                                 chain.getElements().forEach(
@@ -177,7 +177,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#.DJI")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onElementAdded(
                         (position, name, chain) -> 
                                 System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
@@ -225,7 +225,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#.DJI")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .withSummaryLinksToSkip(summaryLinksToSkip)
                 .onChainComplete(
                         (chain) -> chain.getElements().forEach(
@@ -266,7 +266,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#UNIVERSE.NB")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onElementAdded(
                         (position, name, chain) -> 
                         {
@@ -313,7 +313,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#UNIVERSE.NB")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .withNameGuessingOptimization(50)
                 .onElementAdded(
                         (position, name, chain) -> 
@@ -367,7 +367,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName(".AV.O")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .withUpdates(true)
                 .onElementAdded(
                         (position, name, chain) ->
@@ -439,7 +439,7 @@ class ChainExpander
         RecursiveChain theChain = new RecursiveChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#JP-EQ")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onChainComplete(
                         chain ->
                                 chain.getElements().forEach(
@@ -482,7 +482,7 @@ class ChainExpander
         RecursiveChain theChain = new RecursiveChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#JP-EQ")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .withMaxDepth(2)
                 .onChainComplete(
                         chain ->
@@ -527,7 +527,7 @@ class ChainExpander
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("THIS_CHAIN_DOESNT_EXIST")
-                .withServiceName(serviceName)
+                .withServiceName(SERVICE_NAME)
                 .onChainError(
                         (errorMessage, chain) -> 
                                 System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
@@ -558,9 +558,9 @@ class ChainExpander
                     .consumerName("Consumer_1")
                     .operationModel(USER_DISPATCH);
             
-            if(!dacsUserName.isEmpty())
+            if(!DACS_USER_NAME.isEmpty())
             {
-                config.username(dacsUserName);
+                config.username(DACS_USER_NAME);
             }
             
             ommConsumer = EmaFactory.createOmmConsumer(config);

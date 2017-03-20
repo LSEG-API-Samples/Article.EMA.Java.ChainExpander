@@ -94,7 +94,10 @@ public interface RecursiveChain extends Chain
     public abstract Map<List<Long>, List<String>> getElements();
         
     /**
-     * Represents an operation that is called when an element is added to a {@link FlatChain}.
+     * Represents an optional operation that is called when an element is added 
+     * to a {@link RecursiveChain}. This operation is optionally set when the 
+     * {@link RecursiveChain} is created. See the {@link Builder#onElementAdded(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ElementAddedFunction) }
+     * for more details.
      */
     @FunctionalInterface
     public interface ElementAddedFunction
@@ -114,7 +117,10 @@ public interface RecursiveChain extends Chain
     }
     
     /**
-     * Represents an operation that is called when a chain is complete.
+     * Represents an optional operation that is called when a chain is complete.
+     * This operation is optionally set when the {@link RecursiveChain} is 
+     * created. See the {@link Builder#onChainComplete(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ChainCompleteFunction) }
+     * for more details.
      */
     @FunctionalInterface
     public interface ChainCompleteFunction
@@ -128,7 +134,10 @@ public interface RecursiveChain extends Chain
     }
 
     /**
-     * Represents an operation that is called when a chain is in error.
+     * Represents an optional operation that is called when a chain is in error.
+     * This operation is optionally set when the {@link RecursiveChain} is 
+     * created. See the {@link Builder#onChainError(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ChainErrorFunction) }
+     * for more details.
      */    
     @FunctionalInterface
     public interface ChainErrorFunction

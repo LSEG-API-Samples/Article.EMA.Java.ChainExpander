@@ -51,7 +51,10 @@ public interface FlatChain extends Chain
     Map<Long, String> getElements();
         
     /**
-     * Represents an operation that is called when an element is added to a {@link FlatChain}.
+     * Represents an optional operation that is called when an element is added 
+     * to a {@link FlatChain}. This operation is optionally set when the 
+     * {@link FlatChain} is created. See the {@link Builder#onElementAdded(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementAddedFunction)} 
+     * for more details.
      */
     @FunctionalInterface
     public interface ElementAddedFunction
@@ -67,7 +70,10 @@ public interface FlatChain extends Chain
     }
     
     /**
-     * Represents an operation that is called when an chain element changes.
+     * Represents an optional operation that is called when a chain element  
+     * changes. This operation is optionally set when the {@link FlatChain} is 
+     * created. See the {@link Builder#onElementChanged(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementChangedFunction) }
+     * for more details.
      */
     @FunctionalInterface
     public interface ElementChangedFunction
@@ -84,7 +90,10 @@ public interface FlatChain extends Chain
     }
 
     /**
-     * Represents an operation that is called when an element is removed from a chain.
+     * Represents an optional operation that is called when a chain element  
+     * is removed from a chain. This operation is optionally set when the 
+     * {@link FlatChain} is created. See the {@link Builder#onElementRemoved(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementRemovedFunction) } 
+     * for more details.
      */
     @FunctionalInterface
     public interface ElementRemovedFunction
@@ -99,7 +108,10 @@ public interface FlatChain extends Chain
     }
 
     /**
-     * Represents an operation that is called when a chain is complete.
+     * Represents an optional operation that is called when a chain is complete  
+     * This operation is optionally set when the {@link FlatChain} is created. 
+     * See the {@link Builder#onChainComplete(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ChainCompleteFunction) }
+     * for more details.
      */
     @FunctionalInterface
     public interface ChainCompleteFunction
@@ -113,8 +125,11 @@ public interface FlatChain extends Chain
     }
 
     /**
-     * Represents an operation that is called when a chain is in error.
-     */    
+     * Represents an optional operation that is called when a chain is in error.
+     * This operation is optionally set when the {@link FlatChain} is created. 
+     * See the {@link Builder#onChainError(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ChainErrorFunction) }
+     * for more details.
+     */
     @FunctionalInterface
     public interface ChainErrorFunction
     {
