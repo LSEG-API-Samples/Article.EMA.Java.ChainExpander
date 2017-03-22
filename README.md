@@ -14,7 +14,7 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 
 * [Demonstrated features](#demonstrated-features)
 
-* [Using the EMA Chain Toolkit](#using-the-ema-chain-toolkit)
+* [Using the *EMAChainToolkit*](#using-the-ema-chain-toolkit)
 
 * [Building the *ChainExpander* and *EmaChainToolkitExample* applications](#building-the-chainexpander)
 
@@ -42,7 +42,7 @@ Required software components:
 ## <a id="application-design"></a> Application design
 The source code of this example application has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
-### The EMA Chain Toolkit
+### The *EMAChainToolkit*
 This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
 
 ### The *ChainExpander* application
@@ -99,11 +99,11 @@ Once these environment variables setup and hardcoded values are properly set, yo
 
 **Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
 
-To start the *ChainExpander* run the *run-chain-expander.bat* or the *run-chain-expander.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+To start the *ChainExpander* run the *chain-expander.bat* or the *chain-expander.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
 
 ### Usage
 
-    usage: ChainExpander [-s service-name] [-u user-name] chain-name
+    usage: chain-expander [-s service-name] [-u user-name] chain-name
      -s,--service-name <arg>   Elektron or TREP service name
                                Default value: ELEKTRON_DD
      -u,--user-name <arg>      DACS user name
@@ -111,7 +111,7 @@ To start the *ChainExpander* run the *run-chain-expander.bat* or the *run-chain-
 
 ### Example
 
-    >run-chain-expander.bat -s IDN_RDF 0#.DJI
+    > run-chain-expander.bat -s IDN_RDF 0#.DJI
 
 ### Expected output
 
@@ -159,7 +159,7 @@ This is an example of the *ChainExpander* output:
 
 **Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
 
-To start the *EmaChainToolkitExample* run the *run-ema-chain-toolkit-example.bat* or the *run-ema-chain-toolkit-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+To start the *EmaChainToolkitExample* run the *ema-chain-toolkit-example.bat* or the *ema-chain-toolkit-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
 
 ### Expected output
 

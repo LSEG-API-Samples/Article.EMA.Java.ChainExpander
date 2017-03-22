@@ -89,7 +89,7 @@ class ChainExpander
     
     private static void analyzeArguments(String[] args)
     {        
-        String syntax = "ChainExpander [-s service-name] [-u user-name] chain-name";
+        String syntax = "chain-expander [-s service-name] [-u user-name] chain-name";
         Options options = new Options();
 
         Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
