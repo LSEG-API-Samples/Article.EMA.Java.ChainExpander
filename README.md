@@ -6,6 +6,8 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 
 * [Overview](#overview)
 
+* [Disclaimer](#disclaimer)
+
 * [Prerequisites](#prerequisites)
 
 * [Application design](#application-design)
@@ -14,9 +16,11 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 
 * [Using the EMA Chain Toolkit](#using-the-ema-chain-toolkit)
 
-* [Building the ChainExpander](#building-the-chainexpander)
+* [Building the *ChainExpander* and *EmaChainToolkitExample* applications](#building-the-chainexpander)
 
-* [Running the ChainExpander](#running-the-chainexpander)
+* [Running the *ChainExpander*](#running-the-chainexpander)
+
+* [Running the *EmaChainToolkitExample*](#running-the-ema-chain-toolkit-example)
 
 * [Troubleshooting](#troubleshooting)
 
@@ -24,6 +28,9 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 
 ## <a id="overview"></a>Overview
 The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easily reusable in your own source code application.
+
+## <a id="disclaimer"></a>Disclaimer
+The source code presented in this project has been written by Thomson Reuters for the only purpose of illustrating the *Decoding chains* articles [part 1](https://developers.thomsonreuters.com/article/elektron-article-1) and [part 2](https://developers.thomsonreuters.com/article/elektron-article-1) published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). It has not been tested for a usage in production environments.
 
 ## <a id="prerequisites"></a>Prerequisites
 
@@ -33,20 +40,25 @@ Required software components:
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
 ## <a id="application-design"></a> Application design
-The source code of this example application has been designed for easy reuse. It is made of two distinct parts:
+The source code of this example application has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
 ### The EMA Chain Toolkit
-This is a reusable module that implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit contained in the *com.thomsonreuters.platformservices.ema.utils.chain* package. The source code of this package can be integrated in your application project as is. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
+This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
 
-### The ChainExpander
-This is the example application itself. It is made of a single source file that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA *OmmConsumer* and uses it with the toolkit to expand different kind of chains. Chains are expanded one by one in 10 individual steps. Before each step an explanatory text is displayed and you are prompted to press *\<Enter>* to start the step.
+### The *ChainExpander* application
 
-The *ChainExpander* application also implements utility methods that are used to dispatch the *OmmConsumer* in different situations: until a chain is complete, until the user presses *\<Enter>* or until a certain amount of time is elapsed.
+This example application allows you to expand a flat chain from the command line. When the expansion is done, chain elements names are simply displayed on the output.
+
+### The *EmaChainToolkitExample* application
+
+This is an example application that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it with the toolkit to expand different kinds of chains. Chain examples are expanded one by one in 10 individual steps.  Before each step, explanatory text is displayed and you are prompted to press <Enter> to start the step.
+
+The EmaChainToolkitExample application also implements utility methods that are used to dispatch the OmmConsumer in different situations: until a chain is complete, until the user presses <Enter> or until a certain amount of time is elapsed.
 
 **Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
 
-## <a id="demonstrated-features"></a>Demonstrated features
-The Chain Expander application demonstrates the following *EMA Chain Toolkit* features:
+#### <a id="demonstrated-features"></a>Demonstrated features
+The *EmaChainToolkitExample* application demonstrates the following *EMA Chain Toolkit* features:
 
 * **Step 1:** Builds and opens the Dow Jones chain (0#.DJI). Waits for the chain to complete using the *isComplete()* method. Gets and display the chain elements.
 * **Step 2:** Builds and opens the Dow Jones chain. Leverages the *ChainCompleteFunction* functional interface to wait for completion, to get the chain elements and to display them.
@@ -62,7 +74,7 @@ The Chain Expander application demonstrates the following *EMA Chain Toolkit* fe
 ## <a id="using-the-ema-chain-toolkit"></a>Using the EMA Chain Toolkit
 For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
 
-## <a id="building-the-chainexpander"></a>Building the ChainExpander
+## <a id="building-the-chainexpander"></a>Building the *ChainExpander* and *EmaChainToolkitExample* applications
 
 ### Set the required environment variables
 
@@ -72,33 +84,94 @@ This package includes some convenient files which will enable the developer to q
 
 ### Change the service name and DACS user name if need be
 
-The *ChainExpander.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
+The *EmaChainToolkitExample.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
 
-* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *ChainExpander.serviceName* field at line 22 of *ChainExpander.java*.  
-* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *ChainExpander.dacsUserName* field at line 30 of *ChainExpander.java*.
+* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *EmaChainToolkitExample.serviceName* field at line 22 of *EmaChainToolkitExample.java*.  
+* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *EmaChainToolkitExample.dacsUserName* field at line 30 of *EmaChainToolkitExample.java*.
 
 ### Run the *build* script
 
-Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the application.
+Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the *ChainExpander* and *EmaChainToolkitExample* applications.
 
-**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the *ChainExpander*. NetBeans 8.2 project files are provided with the source code of the application.    
+**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applicaitons source code.    
 
-## <a id="running-the-chainexpander"></a>Running the ChainExpander
+## <a id="running-the-chainexpander"></a>Running the *ChainExpander*
+
 **Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
 
-To start the ChainExpander run the *run.bat* or the *run.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+To start the *ChainExpander* run the *run-chain-expander.bat* or the *run-chain-expander.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+
+### Usage
+
+    usage: ChainExpander [-s service-name] [-u user-name] chain-name
+     -s,--service-name <arg>   Elektron or TREP service name
+                               Default value: ELEKTRON_DD
+     -u,--user-name <arg>      DACS user name
+                               Default value: System user name
+
+### Example
+
+    >run-chain-expander.bat -s IDN_RDF 0#.DJI
 
 ### Expected output
 
-This is an example of the ChainExpander output for each step:
+This is an example of the *ChainExpander* output:
+
+      >>> Input parameters:
+            chain-name="0#.DJI"
+            service-name="IDN_RDF"
+            user-name=""
+      >>> Connecting to the infrastructure...
+      >>> Expanding the chain...
+            0#.DJI[0] = .DJI
+            0#.DJI[1] = AAPL.OQ
+            0#.DJI[2] = AXP.N
+            0#.DJI[3] = BA.N
+            0#.DJI[4] = CAT.N
+            0#.DJI[5] = CSCO.OQ
+            0#.DJI[6] = CVX.N
+            0#.DJI[7] = DD.N
+            0#.DJI[8] = DIS.N
+            0#.DJI[9] = GE.N
+            0#.DJI[10] = GS.N
+            0#.DJI[11] = HD.N
+            0#.DJI[12] = IBM.N
+            0#.DJI[13] = INTC.OQ
+            0#.DJI[14] = JNJ.N
+            0#.DJI[15] = JPM.N
+            0#.DJI[16] = KO.N
+            0#.DJI[17] = MCD.N
+            0#.DJI[18] = MMM.N
+            0#.DJI[19] = MRK.N
+            0#.DJI[20] = MSFT.OQ
+            0#.DJI[21] = NKE.N
+            0#.DJI[22] = PFE.N
+            0#.DJI[23] = PG.N
+            0#.DJI[24] = TRV.N
+            0#.DJI[25] = UNH.N
+            0#.DJI[26] = UTX.N
+            0#.DJI[27] = V.N
+            0#.DJI[28] = VZ.N
+            0#.DJI[29] = WMT.N
+            0#.DJI[30] = XOM.N
+
+## <a id="running-the-ema-chain-toolkit-example"></a>Running the *EmaChainToolkitExample*
+
+**Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
+
+To start the *EmaChainToolkitExample* run the *run-ema-chain-toolkit-example.bat* or the *run-ema-chain-toolkit-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
+
+### Expected output
+
+This is an example of the *EmaChainToolkitExample* output for each step:
 
     -------------------------------------------------------------------------------
     |                                                                             |
-    |                 Chain Expander toolkit example application                  |
+    |                    EMA Chain toolkit example application                    |
     |                                                                             |
     | This example application illustrates the concepts explained in the          |
     | "Decoding chains with the Elektron Message API" article published on the    |
-    | Thomson Reuters Developer Portal (URL). More specifically, this application |
+    | Thomson Reuters Developer Portal. More specifically, this application       |
     | demonstrates how to use the EMA chain toolkit that implements the different |
     | concepts, algorithms and optimizations described in the article.            |
     |                                                                             |
