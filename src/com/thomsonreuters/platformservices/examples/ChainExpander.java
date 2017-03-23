@@ -40,6 +40,12 @@ class ChainExpander
     
     // Data Access Control System (DACS) username. 
     private static String dacsUserName = "";
+    
+    // Indicates if the optimized algorithm must be used. 
+    private static int nbOfNamesToGuessForOptimization = 0;    
+    
+    // Indicates if the verbose mode is enabled. 
+    private static boolean verboseMode = true;    
 
     // The OmmConsumer used to request the chains
     private static OmmConsumer ommConsumer;
@@ -51,30 +57,51 @@ class ChainExpander
     {
         analyzeArguments(args);
 
-        System.out.println();
-        System.out.println("  >>> Input parameters:");
-        System.out.println("\tchain-name=\"" + chainName + "\"");
-        System.out.println("\tservice-name=\"" + serviceName + "\"");
-        System.out.println("\tuser-name=\"" + dacsUserName + "\"");       
+        if(verboseMode)
+        {
+            System.out.println();
+            System.out.println("  >>> Input parameters:");
+            System.out.println("\tchain-name  : \"" + chainName + "\"");
+            System.out.println("\tservice-name: \"" + serviceName + "\"");
+            System.out.println("\tuser-name   : \"" + dacsUserName + "\"");
+            if(nbOfNamesToGuessForOptimization > 0)
+            {
+                System.out.println("\toptimization: enabled");       
+            }
+            else
+            {
+                System.out.println("\toptimization: disabled");    
+            }
+            if(verboseMode)
+            {
+                System.out.println("\tnon-verbose : disabled");       
+            }
+        }
         
-        System.out.println("  >>> Connecting to the infrastructure...");        
+        if(verboseMode) System.out.println("  >>> Connecting to the infrastructure...");        
         createOmmConsumer();
         
-        System.out.println("  >>> Expanding the chain...");        
+        if(verboseMode) System.out.println("  >>> Expanding the chain. Please wait...");        
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName(chainName)
                 .withServiceName(serviceName)
+                .withNameGuessingOptimization(nbOfNamesToGuessForOptimization)
                 .onChainComplete(
                     (chain) ->
                         chain.getElements().forEach(
-                                (position, name) -> 
-                                        System.out.println("\t" + chain.getName() + "[" + position + "] = " + name)
+                            (position, name) ->
+                            {
+                                if(verboseMode) 
+                                    System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                                else
+                                    System.out.println(name);
+                                }
                         )
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    (errorMessage, chain) -> 
+                        System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
                 )
                 .build();
         
@@ -89,7 +116,7 @@ class ChainExpander
     
     private static void analyzeArguments(String[] args)
     {        
-        String syntax = "chain-expander [-s service-name] [-u user-name] chain-name";
+        String syntax = "chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name";
         Options options = new Options();
 
         Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
@@ -99,6 +126,14 @@ class ChainExpander
         Option dacsUserNameOption = new Option("u", "user-name", true, "DACS user name\nDefault value: System user name");
         dacsUserNameOption.setRequired(false);
         options.addOption(dacsUserNameOption);
+
+        Option optimizationOption = new Option("o", "optimization", false, "Enables the optimized algorithm for opening long chains. This is not appropriate for short chains (less than 300 elements).");
+        optimizationOption.setRequired(false);
+        options.addOption(optimizationOption);
+
+        Option nonVerboseOption = new Option("nv", "non-verbose", false, "Enables the non verbose mode. Only the chain elements are displayed.");
+        nonVerboseOption.setRequired(false);
+        options.addOption(nonVerboseOption);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -133,6 +168,14 @@ class ChainExpander
         if(cmd.hasOption("user-name"))
         {        
             dacsUserName = cmd.getOptionValue("user-name");
+        }
+        if(cmd.hasOption("optimization"))
+        {        
+            nbOfNamesToGuessForOptimization = 20;
+        }
+        if(cmd.hasOption("non-verbose"))
+        {        
+            verboseMode = false;
         }
     }
     
