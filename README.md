@@ -103,7 +103,13 @@ To start the *ChainExpander* run the *chain-expander.bat* or the *chain-expander
 
 ### Usage
 
-    usage: chain-expander [-s service-name] [-u user-name] chain-name
+    usage: chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name
+
+     -nv,--non-verbose         Enables the non verbose mode. Only the chain
+                               elements are displayed.
+     -o,--optimization         Enables the optimized algorithm for opening
+                               long chains. This is not appropriate for short
+                               chains (less than 300 elements).
      -s,--service-name <arg>   Elektron or TREP service name
                                Default value: ELEKTRON_DD
      -u,--user-name <arg>      DACS user name
@@ -111,18 +117,20 @@ To start the *ChainExpander* run the *chain-expander.bat* or the *chain-expander
 
 ### Example
 
-    > run-chain-expander.bat -s IDN_RDF 0#.DJI
+    > chain-expander.bat -s IDN_RDF 0#.DJI
 
 ### Expected output
 
 This is an example of the *ChainExpander* output:
 
       >>> Input parameters:
-            chain-name="0#.DJI"
-            service-name="IDN_RDF"
-            user-name=""
+            chain-name  : "0#.DJI"
+            service-name: "ELEKTRON_DD"
+            user-name   : ""
+            optimization: disabled
+            non-verbose : disabled
       >>> Connecting to the infrastructure...
-      >>> Expanding the chain...
+      >>> Expanding the chain. Please wait...
             0#.DJI[0] = .DJI
             0#.DJI[1] = AAPL.OQ
             0#.DJI[2] = AXP.N
