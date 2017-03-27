@@ -29,6 +29,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.json.JSONObject;
 
 class ChainExpander
 {
@@ -46,6 +47,9 @@ class ChainExpander
     
     // Indicates if the verbose mode is enabled. 
     private static boolean verboseMode = true;    
+    
+    // Indicates if chain elements must be displayed in JSON format. 
+    private static boolean jsonOutputMode = false;    
 
     // The OmmConsumer used to request the chains
     private static OmmConsumer ommConsumer;
@@ -56,48 +60,26 @@ class ChainExpander
     public static void main(String[] args)
     {
         analyzeArguments(args);
-
-        if(verboseMode)
-        {
-            System.out.println();
-            System.out.println("  >>> Input parameters:");
-            System.out.println("\tchain-name  : \"" + chainName + "\"");
-            System.out.println("\tservice-name: \"" + serviceName + "\"");
-            System.out.println("\tuser-name   : \"" + dacsUserName + "\"");
-            if(nbOfNamesToGuessForOptimization > 0)
-            {
-                System.out.println("\toptimization: enabled");       
-            }
-            else
-            {
-                System.out.println("\toptimization: disabled");    
-            }
-            if(verboseMode)
-            {
-                System.out.println("\tnon-verbose : disabled");       
-            }
-        }
         
-        if(verboseMode) System.out.println("  >>> Connecting to the infrastructure...");        
+        if(verboseMode)
+            displayParameters();
+        
+        if(verboseMode) 
+            System.out.println("  >>> Connecting to the infrastructure...");        
+        
         createOmmConsumer();
         
-        if(verboseMode) System.out.println("  >>> Expanding the chain. Please wait...");        
+        if(verboseMode) 
+            System.out.println("  >>> Expanding the chain. Please wait...");        
+        
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName(chainName)
                 .withServiceName(serviceName)
                 .withNameGuessingOptimization(nbOfNamesToGuessForOptimization)
                 .onChainComplete(
-                    (chain) ->
-                        chain.getElements().forEach(
-                            (position, name) ->
-                            {
-                                if(verboseMode) 
-                                    System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
-                                else
-                                    System.out.println(name);
-                                }
-                        )
+                    (chain) -> 
+                        printChain(chain)
                 )
                 .onChainError(
                     (errorMessage, chain) -> 
@@ -112,71 +94,6 @@ class ChainExpander
         theChain.close();                    
         
         uninitializeOmmConsumer();
-    }
-    
-    private static void analyzeArguments(String[] args)
-    {        
-        String syntax = "chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name";
-        Options options = new Options();
-
-        Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
-        serviceNameOption.setRequired(false);
-        options.addOption(serviceNameOption);
-
-        Option dacsUserNameOption = new Option("u", "user-name", true, "DACS user name\nDefault value: System user name");
-        dacsUserNameOption.setRequired(false);
-        options.addOption(dacsUserNameOption);
-
-        Option optimizationOption = new Option("o", "optimization", false, "Enables the optimized algorithm for opening long chains. This is not appropriate for short chains (less than 300 elements).");
-        optimizationOption.setRequired(false);
-        options.addOption(optimizationOption);
-
-        Option nonVerboseOption = new Option("nv", "non-verbose", false, "Enables the non verbose mode. Only the chain elements are displayed.");
-        nonVerboseOption.setRequired(false);
-        options.addOption(nonVerboseOption);
-
-        CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
-        CommandLine cmd;
-
-        try 
-        {
-            cmd = parser.parse(options, args);
-        } 
-        catch (ParseException e) 
-        {
-            System.out.println(e.getMessage());
-            formatter.printHelp(syntax, options);
-            System.exit(1);
-            return;
-        }
-
-        List<String> parsedArguments = cmd.getArgList();
-        if(parsedArguments.size() != 1)
-        {
-            System.out.println("Missing required chain-name\n");
-            formatter.printHelp(syntax, options);
-            System.exit(1);
-            return;
-        }
-        
-        chainName = parsedArguments.get(0);
-        if(cmd.hasOption("service-name"))
-        {
-            serviceName = cmd.getOptionValue("service-name");
-        }
-        if(cmd.hasOption("user-name"))
-        {        
-            dacsUserName = cmd.getOptionValue("user-name");
-        }
-        if(cmd.hasOption("optimization"))
-        {        
-            nbOfNamesToGuessForOptimization = 20;
-        }
-        if(cmd.hasOption("non-verbose"))
-        {        
-            verboseMode = false;
-        }
     }
     
     private static void createOmmConsumer()
@@ -230,4 +147,140 @@ class ChainExpander
             exit(-1);
         }                
     }
+    
+    private static void printChain(FlatChain chain)
+    {
+        if(jsonOutputMode)
+        {
+            printChainInJsonFormat(chain);
+        }
+        else
+        {
+            printChainInTextFormat(chain);
+        }
+    }
+    
+    private static void printChainInTextFormat(FlatChain chain)
+    {
+        chain.getElements().forEach(
+            (position, name) ->
+            {
+                if(verboseMode) 
+                    System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                else
+                    System.out.println(name);
+            }
+        );      
+    }    
+    
+    private static void printChainInJsonFormat(FlatChain chain)
+    {
+        JSONObject json = new JSONObject();
+        json.put("name", chain.getName());        
+        json.put("elements", new JSONObject(chain.getElements()));
+        
+        System.out.println(json);
+    }
+    
+    private static void analyzeArguments(String[] args)
+    {        
+        String syntax = "chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name";
+        Options options = new Options();
+
+        Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
+        serviceNameOption.setRequired(false);
+        options.addOption(serviceNameOption);
+
+        Option dacsUserNameOption = new Option("u", "user-name", true, "DACS user name\nDefault value: System user name");
+        dacsUserNameOption.setRequired(false);
+        options.addOption(dacsUserNameOption);
+
+        Option optimizationOption = new Option("o", "optimization", false, "Enables the optimized algorithm for opening long chains. This is not appropriate for short chains (less than 300 elements).");
+        optimizationOption.setRequired(false);
+        options.addOption(optimizationOption);
+
+        Option nonVerboseOption = new Option("nv", "non-verbose-mode", false, "Enables the non verbose mode. Only the chain elements are displayed.");
+        nonVerboseOption.setRequired(false);
+        options.addOption(nonVerboseOption);
+
+        Option jsonOutputOption = new Option("j", "json-output-mode", false, "Outputs chain elements in JSON format.");
+        jsonOutputOption.setRequired(false);
+        options.addOption(jsonOutputOption);
+
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        try 
+        {
+            cmd = parser.parse(options, args);
+        } 
+        catch (ParseException e) 
+        {
+            System.out.println(e.getMessage());
+            formatter.printHelp(syntax, options);
+            System.exit(1);
+            return;
+        }
+
+        List<String> parsedArguments = cmd.getArgList();
+        if(parsedArguments.size() != 1)
+        {
+            System.out.println("Missing required chain-name\n");
+            formatter.printHelp(syntax, options);
+            System.exit(1);
+            return;
+        }
+        
+        chainName = parsedArguments.get(0);
+        if(cmd.hasOption("service-name"))
+        {
+            serviceName = cmd.getOptionValue("service-name");
+        }
+        if(cmd.hasOption("user-name"))
+        {        
+            dacsUserName = cmd.getOptionValue("user-name");
+        }
+        if(cmd.hasOption("optimization"))
+        {        
+            nbOfNamesToGuessForOptimization = 20;
+        }
+        if(cmd.hasOption("non-verbose-mode"))
+        {        
+            verboseMode = false;
+        }
+        if(cmd.hasOption("json-output-mode"))
+        {        
+            jsonOutputMode = true;
+        }
+    }    
+    
+    private static void displayParameters()
+    {
+        System.out.println();
+        System.out.println("  >>> Input parameters:");
+        System.out.println("\tchain-name      : \"" + chainName + "\"");
+        System.out.println("\tservice-name    : \"" + serviceName + "\"");
+        System.out.println("\tuser-name       : \"" + dacsUserName + "\"");
+        if(nbOfNamesToGuessForOptimization > 0)
+        {
+            System.out.println("\toptimization    : enabled");       
+        }
+        else
+        {
+            System.out.println("\toptimization    : disabled");    
+        }
+        if(verboseMode)
+        {
+            System.out.println("\tnon-verbose     : disabled");       
+        }
+        if(jsonOutputMode)
+        {
+            System.out.println("\tjson-output-mode: enabled");       
+        }
+        else
+        {
+            System.out.println("\tjson-output-mode: disabled");    
+        }
+    }    
 }
