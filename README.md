@@ -27,7 +27,7 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-The Chain Expander example demonstrates the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). This application is based on the Java edition of the Elektron Message API and is designed in a way that makes it easily reusable in your own source code application.
+This project contains two Java example applications that demonstrate the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). These applications are based on the Java edition of the Elektron Message API that is an API of the Thomson Reuters Elektron SDK.
 
 ## <a id="disclaimer"></a>Disclaimer
 The source code presented in this project has been written by Thomson Reuters for the only purpose of illustrating the *Decoding chains* articles [part 1](https://developers.thomsonreuters.com/article/elektron-article-1) and [part 2](https://developers.thomsonreuters.com/article/elektron-article-1) published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). It has not been tested for a usage in production environments.
@@ -39,8 +39,8 @@ Required software components:
 * [Elektron Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) (1.0.8 or greater) - Thomson Reuters interface to the Elektron Market Data environment
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
-## <a id="application-design"></a> Application design
-The source code of this example application has been designed for easy reuse in other example applications. It is made of three distinct parts:
+## <a id="application-design"></a> Applications design
+The source code of these example applications has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
 ### The *EMAChainToolkit*
 This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
@@ -53,23 +53,11 @@ This example application allows you to expand a flat chain from the command line
 
 This is an example application that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it with the toolkit to expand different kinds of chains. Chain examples are expanded one by one in 10 individual steps.  Before each step, explanatory text is displayed and you are prompted to press <Enter> to start the step.
 
-The EmaChainToolkitExample application also implements utility methods that are used to dispatch the OmmConsumer in different situations: until a chain is complete, until the user presses <Enter> or until a certain amount of time is elapsed.
+The *EmaChainToolkitExample* application also implements utility methods that are used to dispatch the OmmConsumer in different situations: until a chain is complete, until the user presses <Enter> or until a certain amount of time is elapsed.
+
+For more details about the *EmaChainToolkitExample* application please refer to the [Decoding chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2#the-emachaintoolkitexample-application) article. 
 
 **Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
-
-#### <a id="demonstrated-features"></a>Demonstrated features
-The *EmaChainToolkitExample* application demonstrates the following *EMA Chain Toolkit* features:
-
-* **Step 1:** Builds and opens the Dow Jones chain (0#.DJI). Waits for the chain to complete using the *isComplete()* method. Gets and display the chain elements.
-* **Step 2:** Builds and opens the Dow Jones chain. Leverages the *ChainCompleteFunction* functional interface to wait for completion, to get the chain elements and to display them.
-* **Step 3:** Builds and opens the Dow Jones chain. Leverages the *ElementAddedFunction* functional interface to display new chain elements as soon as they are decoded.
-* **Step 4:** Same as Step 2 but skip the summary links (first link .DJI in the case of the Dow Jones).
-* **Step 5:** Opens a very long chain (NASDAQ Basic) using the default algorithm. The NASDAQ Basic chain (0#UNIVERSE.NB) contains more than 8000 elements and may take more than 30 seconds to open with the default algorithm.
-* **Step 6:** Same as Step 5 but with the "Name Guessing" optimized algorithm. This time the chain takes 1 second or so to open.
-* **Step 7:** Opens the "NYSE Active Volume leaders" tile (.AV.O) with updates and display any change that happens thanks to the *ElementAddedFunction*, *ElementChangedFunction* and *ElementRemovedFunction* functional interfaces. Tiles are chains that updates very frequently. .AV.O updates often when the US market is opened.
-* **Step 8:** Opens and displays the Japanese Equity Market recursive chain (0#JP-EQ).  This chain is a 3 levels depth chain of chains.
-* **Step 9:** Same as Step 8 but with a maximum depth of 2 levels.
-* **Step 10:** Opens a chain that doesn’t exit. Leverages the *ChainErrorFunction* functional interface to catch and display the error.
 
 ## <a id="using-the-ema-chain-toolkit"></a>Using the EMA Chain Toolkit
 For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
