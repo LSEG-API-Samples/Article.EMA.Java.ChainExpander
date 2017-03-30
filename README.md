@@ -10,11 +10,7 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 
 * [Prerequisites](#prerequisites)
 
-* [Application design](#application-design)
-
-* [Demonstrated features](#demonstrated-features)
-
-* [Using the *EMAChainToolkit*](#using-the-ema-chain-toolkit)
+* [Applications design](#application-design)
 
 * [Building the *ChainExpander* and *EmaChainToolkitExample* applications](#building-the-chainexpander)
 
@@ -43,7 +39,9 @@ Required software components:
 The source code of these example applications has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
 ### The *EMAChainToolkit*
-This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. The toolkit also comes with a [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip) that fully describes the exposed API. The [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article explains how to use it.
+This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. 
+
+For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
 
 ### The *ChainExpander* application
 
@@ -58,9 +56,6 @@ The *EmaChainToolkitExample* application also implements utility methods that ar
 For more details about the *EmaChainToolkitExample* application please refer to the [Decoding chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2#the-emachaintoolkitexample-application) article. 
 
 **Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
-
-## <a id="using-the-ema-chain-toolkit"></a>Using the EMA Chain Toolkit
-For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
 
 ## <a id="building-the-chainexpander"></a>Building the *ChainExpander* and *EmaChainToolkitExample* applications
 
