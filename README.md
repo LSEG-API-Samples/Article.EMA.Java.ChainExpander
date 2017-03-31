@@ -43,9 +43,6 @@ This module implements the complete chain decoding logic and algorithms explaine
 
 For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
 
-### The *ChainExpander* application
-
-This example application allows you to expand a flat chain from the command line. When the expansion is done, chain elements names are simply displayed on the output either in text or JSON format. The application accepts options and arguments that allow you to set the chain name, the service name and the DACS user name. You can also activate the optimization for long chains or even switch the application to a non verbose mode and redirect the output (the chain elements) to a file so that it can be processed by another application or script.
 
 ### The *EmaChainToolkitExample* application
 
@@ -56,6 +53,10 @@ The *EmaChainToolkitExample* application also implements utility methods that ar
 For more details about the *EmaChainToolkitExample* application please refer to the [Decoding chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2#the-emachaintoolkitexample-application) article. 
 
 **Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
+
+### The *ChainExpander* command line tool
+
+This example application allows you to expand a flat chain from the command line. When the expansion is done, chain elements names are simply displayed on the output either in text or JSON format. The application accepts options and arguments that allow you to set the chain name, the service name and the DACS user name. You can also activate the optimization for long chains or even switch the application to a non verbose mode and redirect the output (the chain elements) to a file so that it can be processed by another application or script.
 
 ## <a id="building-the-chainexpander"></a>Building the *ChainExpander* and *EmaChainToolkitExample* applications
 
