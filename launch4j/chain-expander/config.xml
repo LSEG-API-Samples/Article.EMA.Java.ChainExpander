@@ -1,0 +1,41 @@
+<launch4jConfig>
+  <headerType>console</headerType>
+  <outfile>..\..\dist\chain-expander\chain-expander.exe</outfile>
+  <jar>..\..\dist\ChainExpander.jar</jar>
+  <classPath>
+    <mainClass>com.thomsonreuters.platformservices.examples.ChainExpander</mainClass>
+    <cp>..\..\dist\lib\ema.jar</cp>
+    <cp>..\..\dist\lib\upa.jar</cp>
+    <cp>..\..\dist\lib\upaValueAdd.jar</cp>
+    <cp>..\..\dist\lib\slf4j-api-1.7.12.jar</cp>
+    <cp>..\..\dist\lib\slf4j-jdk14-1.7.12.jar</cp>
+    <cp>..\..\dist\lib\commons-configuration-1.10.jar</cp>
+    <cp>..\..\dist\lib\commons-logging-1.2.jar</cp>
+    <cp>..\..\dist\lib\commons-lang-2.6.jar</cp>
+    <cp>..\..\dist\lib\org.apache.commons.collections.jar</cp>
+    <cp>..\..\dist\lib\commons-cli-1.4.jar</cp>
+    <cp>..\..\dist\lib\json-20160810.jar</cp>
+  </classPath>
+  <jre>
+    <minVersion>1.8.0</minVersion>
+    <opt>-Djava.util.logging.config.file=.\logging.properties</opt>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0.0</txtFileVersion>
+    <fileDescription>Command line tool for expanding chains published by Thomson Reuters infrastructures (TREP or Elektron)</fileDescription>
+    <copyright>text</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productName>chain-expander</productName>
+    <companyName>Thomson Reuters</companyName>
+    <internalName>chain-expander</internalName>
+    <originalFilename>chain-expander.exe</originalFilename>
+  </versionInfo>
+  <messages>
+    <startupErr>Startup error - Can't start the chain-expander</startupErr>
+    <bundledJreErr>Bundled JRE error - Can't start the chain-expander</bundledJreErr>
+    <jreVersionErr>JRE version error - Can't start the chain-expander</jreVersionErr>
+    <launcherErr>Launcher error - Can't start the chain-expander</launcherErr>
+  </messages>
+</launch4jConfig>
