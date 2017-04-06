@@ -185,6 +185,8 @@ class ChainExpander
     private static void analyzeArguments(String[] args)
     {        
         String syntax = "chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name";
+        String header = "options:";
+
         Options options = new Options();
 
         Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
@@ -207,6 +209,10 @@ class ChainExpander
         jsonOutputOption.setRequired(false);
         options.addOption(jsonOutputOption);
 
+        String footer = "examples:\n" 
+                      + " chain-expander -nv -s ELEKTRON_DD 0#.DJI\n"
+                      + " chain-expander -nv -j -s ELEKTRON_DD 0#.FTSE";
+        
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
@@ -218,7 +224,7 @@ class ChainExpander
         catch (ParseException e) 
         {
             System.out.println(e.getMessage());
-            formatter.printHelp(syntax, options);
+            formatter.printHelp(syntax, header, options, footer);
             System.exit(1);
             return;
         }
@@ -227,7 +233,7 @@ class ChainExpander
         if(parsedArguments.size() != 1)
         {
             System.out.println("Missing required chain-name\n");
-            formatter.printHelp(syntax, options);
+            formatter.printHelp(syntax, header, options, footer);
             System.exit(1);
             return;
         }
