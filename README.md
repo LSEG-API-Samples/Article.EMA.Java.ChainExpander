@@ -89,8 +89,9 @@ To start the *ChainExpander* run the *chain-expander.bat* or the *chain-expander
 
     usage: chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name
 
+    options:
      -j,--json-output-mode     Outputs chain elements in JSON format.
-     -nv,--non-verbose         Enables the non verbose mode. Only the chain
+     -nv,--non-verbose-mode    Enables the non verbose mode. Only the chain
                                elements are displayed.
      -o,--optimization         Enables the optimized algorithm for opening
                                long chains. This is not appropriate for short
@@ -99,10 +100,16 @@ To start the *ChainExpander* run the *chain-expander.bat* or the *chain-expander
                                Default value: ELEKTRON_DD
      -u,--user-name <arg>      DACS user name
                                Default value: System user name
+                               Default value: System user name
+### Examples
 
-### Example
+    > chain-expander -s ELEKTRON_DD 0#.DJI
 
-    > chain-expander.bat -s IDN_RDF 0#.DJI
+    > chain-expander -nv -s ELEKTRON_DD 0#.DJI
+
+    > chain-expander -nv -j -s ELEKTRON_DD 0#.FTSE
+
+
 
 ### Expected output
 
