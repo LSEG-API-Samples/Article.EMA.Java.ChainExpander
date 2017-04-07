@@ -1,7 +1,7 @@
 <launch4jConfig>
   <headerType>console</headerType>
   <outfile>..\..\dist\chain-expander\chain-expander.exe</outfile>
-  <jar>..\..\dist\ChainExpander.jar</jar>
+  <jar>..\..\dist\Article-EMA-Java-ChainExpander.jar</jar>
   <classPath>
     <mainClass>com.thomsonreuters.platformservices.examples.ChainExpander</mainClass>
     <cp>..\..\dist\lib\ema.jar</cp>
