@@ -23,7 +23,11 @@ Created by Platform Services GitHub tool on Mon Mar 06 2017
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-This project contains two Java example applications that demonstrate the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). These applications are based on the Java edition of the Elektron Message API that is an API of the Thomson Reuters Elektron SDK.
+This project is one of the many learning materials published by Thomson Reuters to help developers learning Thomson Reuters APIs. It contains two Java example applications that demonstrate the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community portal](https://developers.thomsonreuters.com). These applications are based on the Java edition of the Elektron Message API that is one of the APIs of the Thomson Reuters Elektron SDK. Please consult this [Elektron SDK page](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) for more learning materials and documentation about this API.
+
+For any question related to this article please use the Developer Community [Q&A Forum](https://community.developers.thomsonreuters.com).
+
+***Note:** To be able to ask questions and to benefit the full content available on the [TR Developer Community portal](https://developers.thomsonreuters.com) we recommend you to register [here]( https://developers.thomsonreuters.com/iam/register) and [login]( https://developers.thomsonreuters.com/iam/login?destination_path=Lw%3D%3D).*
 
 ## <a id="disclaimer"></a>Disclaimer
 The source code presented in this project has been written by Thomson Reuters for the only purpose of illustrating the *Decoding chains* articles [part 1](https://developers.thomsonreuters.com/article/elektron-article-1) and [part 2](https://developers.thomsonreuters.com/article/elektron-article-1) published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). It has not been tested for a usage in production environments.
