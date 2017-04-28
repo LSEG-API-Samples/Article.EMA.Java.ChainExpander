@@ -27,7 +27,7 @@ This project is one of the many learning materials published by Thomson Reuters 
 
 For any question related to this article please use the Developer Community [Q&A Forum](https://community.developers.thomsonreuters.com).
 
-***Note:** To be able to ask questions and to benefit the full content available on the [TR Developer Community portal](https://developers.thomsonreuters.com) we recommend you to [register here]( https://developers.thomsonreuters.com/iam/register) or [login here]( https://developers.thomsonreuters.com/iam/login?destination_path=Lw%3D%3D).*
+***Note:** To be able to ask questions and to benefit from the full content available on the [TR Developer Community portal](https://developers.thomsonreuters.com) we recommend you to [register here]( https://developers.thomsonreuters.com/iam/register) or [login here]( https://developers.thomsonreuters.com/iam/login?destination_path=Lw%3D%3D).*
 
 ## <a id="disclaimer"></a>Disclaimer
 The source code presented in this project has been written by Thomson Reuters for the only purpose of illustrating the *Decoding chains* articles [part 1](https://developers.thomsonreuters.com/article/elektron-article-1) and [part 2](https://developers.thomsonreuters.com/article/elektron-article-1) published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). It has not been tested for a usage in production environments.
