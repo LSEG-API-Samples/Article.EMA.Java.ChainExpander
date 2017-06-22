@@ -71,7 +71,7 @@ class EmaChainToolkitExample
         System.out.println("| .ema.utils.chain package.                                                   |");        
         System.out.println("| The application starts by creating an EMA OmmConsumer and uses it with the  |");
         System.out.println("| toolkit to expand a number of different chains, demonstrating the           |");
-        System.out.println("| implemented capabilities. Chain examples are expanded one by one in 10      |");
+        System.out.println("| implemented capabilities. Chain examples are executed one by one in 10      |");
         System.out.println("| individual steps.  Before each step, explanatory text is displayed and you  |");
         System.out.println("| are prompted to press <Enter> to start the step.                            |");
         System.out.println("-------------------------------------------------------------------------------");
