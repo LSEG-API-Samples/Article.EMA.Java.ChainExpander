@@ -1,5 +1,5 @@
 ﻿# ChainExpander example
-Version 1.0 - Last Update Apr 28 2017
+Version 1.0 - Java 7 compatible version - Last Update Aug 30 2017
 
 
 ## Table of Content
