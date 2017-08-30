@@ -1,5 +1,5 @@
 ﻿# ChainExpander example
-Created by Platform Services GitHub tool on Mon Mar 06 2017
+Version 1.0 - Last Update Apr 28 2017
 
 
 ## Table of Content
