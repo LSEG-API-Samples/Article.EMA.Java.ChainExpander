@@ -69,7 +69,6 @@ public interface FlatChain extends Chain
      * {@link FlatChain} is created. See the {@link Builder#onElementAdded(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementAddedFunction)} 
      * for more details.
      */
-    @FunctionalInterface
     public interface ElementAddedFunction
     {
 
@@ -88,7 +87,6 @@ public interface FlatChain extends Chain
      * created. See the {@link Builder#onElementChanged(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementChangedFunction) }
      * for more details.
      */
-    @FunctionalInterface
     public interface ElementChangedFunction
     {
 
@@ -108,7 +106,6 @@ public interface FlatChain extends Chain
      * {@link FlatChain} is created. See the {@link Builder#onElementRemoved(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ElementRemovedFunction) } 
      * for more details.
      */
-    @FunctionalInterface
     public interface ElementRemovedFunction
     {
 
@@ -126,7 +123,6 @@ public interface FlatChain extends Chain
      * See the {@link Builder#onChainComplete(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ChainCompleteFunction) }
      * for more details.
      */
-    @FunctionalInterface
     public interface ChainCompleteFunction
     {
 
@@ -143,7 +139,6 @@ public interface FlatChain extends Chain
      * See the {@link Builder#onChainError(com.thomsonreuters.platformservices.ema.utils.chain.FlatChain.ChainErrorFunction) }
      * for more details.
      */
-    @FunctionalInterface
     public interface ChainErrorFunction
     {
         /**
@@ -200,11 +195,31 @@ public interface FlatChain extends Chain
         boolean withUpdates = false;
         SummaryLinksToSkipByDisplayTemplate summaryLinksToSkipByDisplayTemplate;
         int nameGuessesCount = 0;
-        ElementAddedFunction elementAddedFunction = (position, name, chain) ->{};
-        ElementChangedFunction elementChangedFunction = (position, previousName, newName, chain) ->{};
-        ElementRemovedFunction elementRemovedFunction = (position, chain) -> {};
-        ChainCompleteFunction chainCompleteFunction = (chain) -> {};
-        ChainErrorFunction chainErrorFunction = (errorMessage, chain) -> {};
+        ElementAddedFunction elementAddedFunction = new ElementAddedFunction() {
+            @Override
+            public void onElementAdded(long position, String name, FlatChain chain) {
+            }
+        };
+        ElementChangedFunction elementChangedFunction = new ElementChangedFunction() {
+            @Override
+            public void onElementChanged(long position, String previousName, String newName, FlatChain chain) {
+            }
+        };
+        ElementRemovedFunction elementRemovedFunction = new ElementRemovedFunction() {
+            @Override
+            public void onElementRemoved(long position, FlatChain chain) {
+            }
+        };
+        ChainCompleteFunction chainCompleteFunction = new ChainCompleteFunction() {
+            @Override
+            public void onComplete(FlatChain chain) {
+            }
+        };
+        ChainErrorFunction chainErrorFunction = new ChainErrorFunction() {
+            @Override
+            public void onError(String errorMessage, FlatChain chain) {
+            }
+        };
 
         /**
          * Default constructor

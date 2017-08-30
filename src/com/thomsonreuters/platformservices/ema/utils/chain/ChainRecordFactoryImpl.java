@@ -70,10 +70,10 @@ class ChainRecordFactoryImpl implements ChainRecordFactory, ChainRecordListener
     @Override
     public synchronized void releaseAll()
     {
-        preOpenedChainRecordByName.values().forEach(
-            (chainRecord) -> chainRecord.close()
-        );
-        
+        for (ChainRecord chainRecord : preOpenedChainRecordByName.values())
+        {
+            chainRecord.close();
+        }
         preOpenedChainRecordByName.clear();
     }
     
@@ -96,7 +96,7 @@ class ChainRecordFactoryImpl implements ChainRecordFactory, ChainRecordListener
             rootName = name.substring(RegExMatcher.end());
         }
                 
-        int id = Integer.parseUnsignedInt(strId, 16);
+        int id = Integer.parseInt(strId, 16);
         int maxId = id + context.getNameGuessesCount();
         for(int nextId = id+1; nextId <= maxId; ++nextId)
         {
@@ -139,7 +139,10 @@ class ChainRecordFactoryImpl implements ChainRecordFactory, ChainRecordListener
 
     private void closeAndRemoveRemainingPreOpenedChainRecords()
     {
-        preOpenedChainRecordByName.forEach((String name, ChainRecord chainRecord) -> chainRecord.close());
+        for (ChainRecord chainRecord : preOpenedChainRecordByName.values())
+        {
+            chainRecord.close();
+        }
         preOpenedChainRecordByName.clear();
     }
 

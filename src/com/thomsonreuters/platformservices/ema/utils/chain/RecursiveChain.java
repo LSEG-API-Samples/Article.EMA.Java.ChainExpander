@@ -112,7 +112,6 @@ public interface RecursiveChain extends Chain
      * {@link RecursiveChain} is created. See the {@link Builder#onElementAdded(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ElementAddedFunction) }
      * for more details.
      */
-    @FunctionalInterface
     public interface ElementAddedFunction
     {
 
@@ -135,7 +134,6 @@ public interface RecursiveChain extends Chain
      * created. See the {@link Builder#onChainComplete(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ChainCompleteFunction) }
      * for more details.
      */
-    @FunctionalInterface
     public interface ChainCompleteFunction
     {
 
@@ -152,7 +150,6 @@ public interface RecursiveChain extends Chain
      * created. See the {@link Builder#onChainError(com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain.ChainErrorFunction) }
      * for more details.
      */    
-    @FunctionalInterface
     public interface ChainErrorFunction
     {
 
@@ -213,10 +210,22 @@ public interface RecursiveChain extends Chain
         SummaryLinksToSkipByDisplayTemplate summaryLinksToSkipByDisplayTemplate;
         int nameGuessesCount;
         int maxDepth = -1;
-        ElementAddedFunction elementAddedFunction = (position, path, chain) ->{};
-        ChainCompleteFunction chainCompleteFunction = (chain) -> {};
-        ChainErrorFunction chainErrorFunction = (errorMessage, chain) -> {};
-
+        ElementAddedFunction elementAddedFunction = new ElementAddedFunction() {
+            @Override
+            public void onElementAdded(List<Long> position, List<String> name, RecursiveChain chain) {
+            }
+        };
+        ChainCompleteFunction chainCompleteFunction = new ChainCompleteFunction() {
+            @Override
+            public void onComplete(RecursiveChain chain) {
+            }
+        };
+        ChainErrorFunction chainErrorFunction = new ChainErrorFunction() {
+            @Override
+            public void onError(String errorMessage, RecursiveChain chain) {
+            }
+        };
+        
         /**
          * Default constructor
          */

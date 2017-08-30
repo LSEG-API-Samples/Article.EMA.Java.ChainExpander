@@ -208,7 +208,7 @@ class FlatChainImpl implements FlatChain, ChainRecordContext, ChainRecordListene
         if(state == State.CLOSED || state == State.CLOSING)
             return;
 
-        elementsByPosition.replace(position, newName);
+        elementsByPosition.put(position, newName);
         elementChangedFunction.onElementChanged(position, previousName, newName, this);
     }
 

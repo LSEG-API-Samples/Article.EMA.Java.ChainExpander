@@ -260,14 +260,15 @@ class ChainRecord implements OmmConsumerClient
     private TreeSet<Integer> getMandatoryFieldsInPayload(Payload payload)
     {
         TreeSet<Integer> mandatoryFieldsSetInPayload = new TreeSet<>();
-        payload.fieldList().forEach((FieldEntry fieldEntry) ->
+        
+        for (FieldEntry fieldEntry : payload.fieldList())
         {
             int fieldId = fieldEntry.fieldId();
             if (FieldIds.ALL_MANDATORY_FIELDS.contains(fieldId))
             {
                 mandatoryFieldsSetInPayload.add(fieldId);
             }
-        });
+        };
 
         return mandatoryFieldsSetInPayload;  
     }

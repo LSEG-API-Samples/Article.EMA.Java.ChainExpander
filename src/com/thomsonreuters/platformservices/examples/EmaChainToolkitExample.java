@@ -24,8 +24,9 @@ import com.thomsonreuters.platformservices.ema.utils.chain.RecursiveChain;
 import com.thomsonreuters.platformservices.ema.utils.chain.SummaryLinksToSkipByDisplayTemplate;
 import java.io.IOException;
 import static java.lang.System.exit;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 class EmaChainToolkitExample
 {
@@ -114,8 +115,12 @@ class EmaChainToolkitExample
                 .withChainName("0#.DJI")
                 .withServiceName(SERVICE_NAME)
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -126,10 +131,12 @@ class EmaChainToolkitExample
         
         // Display the chain elements after the dispatch loop exited because the 
         // chain is complete.   
-        theChain.getElements().forEach(
-                (position, name) ->
-                        System.out.println("\t" + theChain.getName() + "[" + position + "] = " + name)
-        );
+        for (Map.Entry<Long, String> element : theChain.getElements().entrySet()){
+            Long position = element.getKey();
+            String name = element.getValue();
+            
+            System.out.println("\t" + theChain.getName() + "[" + position + "] = " + name);
+        }
         
         System.out.println("    >>> Closing <" + theChain.getName() + ">");
         theChain.close();        
@@ -154,15 +161,25 @@ class EmaChainToolkitExample
                 .withChainName("0#.DJI")
                 .withServiceName(SERVICE_NAME)
                 .onChainComplete(
-                        (chain) -> 
-                                chain.getElements().forEach(
-                                        (position, name) -> 
-                                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name)
-                                )
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
+                            for (Map.Entry<Long, String> element : chain.getElements().entrySet()){
+                                Long position = element.getKey();
+                                String name = element.getValue();
+
+                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                            }
+                        }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -192,12 +209,20 @@ class EmaChainToolkitExample
                 .withChainName("0#.DJI")
                 .withServiceName(SERVICE_NAME)
                 .onElementAdded(
-                        (position, name, chain) -> 
-                                System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
+                    new FlatChain.ElementAddedFunction() {
+                        @Override
+                        public void onElementAdded(long position, String name, FlatChain chain) {
+                            System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name);
+                        }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -241,14 +266,25 @@ class EmaChainToolkitExample
                 .withServiceName(SERVICE_NAME)
                 .withSummaryLinksToSkip(summaryLinksToSkip)
                 .onChainComplete(
-                        (chain) -> chain.getElements().forEach(
-                                (position, name) -> 
-                                        System.out.println("\t" + chain.getName() + "[" + position + "] = " + name)
-                        )
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
+                            for (Map.Entry<Long, String> element : chain.getElements().entrySet()){
+                                Long position = element.getKey();
+                                String name = element.getValue();
+
+                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                            }
+                        }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -274,29 +310,39 @@ class EmaChainToolkitExample
         System.out.println();              
         pressAnyKeyToContinue();
 
-        LocalDateTime startTime = LocalDateTime.now();
+        final Date startTime = new Date();
         
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName("0#UNIVERSE.NB")
                 .withServiceName(SERVICE_NAME)
                 .onElementAdded(
-                        (position, name, chain) -> 
-                        {
+                    new FlatChain.ElementAddedFunction() {
+                        @Override
+                        public void onElementAdded(long position, String name, FlatChain chain) {
                             if(position % 100 == 0)
                                 System.out.println("\t" + (position+1) + " element(s) decoded for <" + chain.getName() + ">. Latest: " + name);
                         }
+                    }
                 )
                 .onChainComplete(
-                        (chain) ->
-                        {
-                            long expansionTimeInSeconds = startTime.until(LocalDateTime.now(), ChronoUnit.SECONDS);
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
+                            Date now = new Date();
+                            long expansionTimeInSeconds = dateDifferenceInSeconds(startTime, now);
+
                             System.out.println("\tChain <" + chain.getName() + "> contains " + chain.getElements().size() + " elements and opened in "+ expansionTimeInSeconds + " seconds.");
                         }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -321,7 +367,7 @@ class EmaChainToolkitExample
         System.out.println();              
         pressAnyKeyToContinue();
 
-        LocalDateTime startTime = LocalDateTime.now();
+        final Date startTime = new Date();
         
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
@@ -329,22 +375,32 @@ class EmaChainToolkitExample
                 .withServiceName(SERVICE_NAME)
                 .withNameGuessingOptimization(50)
                 .onElementAdded(
-                        (position, name, chain) -> 
-                        {
+                    new FlatChain.ElementAddedFunction() {
+                        @Override
+                        public void onElementAdded(long position, String name, FlatChain chain) {
                             if(position % 100 == 0)
                                 System.out.println("\t" + (position+1) + " element(s) decoded for <" + chain.getName() + ">. Latest: " + name);
                         }
-                )
+                    }
+                )                
                 .onChainComplete(
-                        (chain) ->
-                        {
-                            long expansionTimeInSeconds = startTime.until(LocalDateTime.now(), ChronoUnit.SECONDS);
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
+                            Date now = new Date();
+                            long expansionTimeInSeconds = dateDifferenceInSeconds(startTime, now);
+
                             System.out.println("\tChain <" + chain.getName() + "> contains " + chain.getElements().size() + " elements and opened in "+ expansionTimeInSeconds + " seconds.");
                         }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -383,35 +439,52 @@ class EmaChainToolkitExample
                 .withServiceName(SERVICE_NAME)
                 .withUpdates(true)
                 .onElementAdded(
-                        (position, name, chain) ->
-                                System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name)
-                )
-                
+                        new FlatChain.ElementAddedFunction() {
+                            @Override
+                            public void onElementAdded(long position, String name, FlatChain chain) {
+                                System.out.println("\tElement added to <" + chain.getName() + "> at position " + position + ": " + name);
+                            }
+                        }
+                )                
                 .onElementRemoved(
-                        (position, chain) -> 
-                                System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position)
+                        new FlatChain.ElementRemovedFunction() {
+                            @Override
+                            public void onElementRemoved(long position, FlatChain chain) {
+                                System.out.println("\tElement removed from <" + chain.getName() + "> at position " + position);
+                            }
+                        }
                 )
                 .onElementChanged(
-                        (position, previousName, newName, chain) -> 
-                        {
-                            System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
-                            System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);
+                        new FlatChain.ElementChangedFunction() {
+                            @Override
+                            public void onElementChanged(long position, String previousName, String newName, FlatChain chain) {
+                                System.out.println("\tElement changed in <" + chain.getName() + "> at position " + position);
+                                System.out.println("\t\tPrevious name: " + previousName + " New name: " + newName);                                
+                            }
                         }
                 )               
                 .onChainComplete(
-                        (chain) -> 
-                        {
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
                             System.out.println("\n\tThe chain is complete and contains the following elements:");
-                            chain.getElements().forEach(
-                                    (position, name) ->
-                                            System.out.println("\t\t" + chain.getName() + "[" + position + "] = " + name)
-                            );
+                            for (Map.Entry<Long, String> element : chain.getElements().entrySet()){
+                                Long position = element.getKey();
+                                String name = element.getValue();
+
+                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                            }
                             System.out.println("\tWaiting for updates...\n");
                         }
-                )                
+                    }
+                )
                 .onChainError(
-                        (errorMessage, chain) ->
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -422,13 +495,16 @@ class EmaChainToolkitExample
         
         {// Prints the chain after 2 minutes
             System.out.println("\n\tThe chain is about to be closed. It now contains the following elements:");
-            theChain.getElements().forEach(
-                    (position, name) -> 
-                            System.out.println("\t\t" + theChain.getName() + "[" + position + "] = " + name)
-            );
+            
+            for (Map.Entry<Long, String> element : theChain.getElements().entrySet()){
+                Long position = element.getKey();
+                String name = element.getValue();
+
+                System.out.println("\t\t" + theChain.getName() + "[" + position + "] = " + name);
+            }
             System.out.println();
         }        
-        
+                
         System.out.println("    >>> Closing <" + theChain.getName() + ">");
         theChain.close();        
     }    
@@ -454,20 +530,28 @@ class EmaChainToolkitExample
                 .withChainName("0#JP-EQ")
                 .withServiceName(SERVICE_NAME)
                 .onChainComplete(
-                        chain ->
-                                chain.getElements().forEach(
-                                    (position, name) ->
-                                        System.out.println("\t" + chain.getName() + position + " = " + name)
-                                )
+                    new RecursiveChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(RecursiveChain chain) {
+                            for (Map.Entry<List<Long>, List<String>> element : chain.getElements().entrySet()){
+                                List<Long> position = element.getKey();
+                                List<String> name = element.getValue();
+
+                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                            }
+                        }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) ->  
-                        {
-                            if(!chain.isAChain())
-                            {
-                                System.out.println("<" + chain.getName() + "> is not a chain");
+                        new RecursiveChain.ChainErrorFunction() {
+                            @Override
+                            public void onError(String errorMessage, RecursiveChain chain) {
+                                if(!chain.isAChain())
+                                {
+                                    System.out.println("<" + chain.getName() + "> is not a chain");
+                                }
+                                System.out.println("Error received for <" + chain.getName() + ">: " + errorMessage);
                             }
-                            System.out.println("Error received for <" + chain.getName() + ">: " + errorMessage);
                         }
                 )
                 .build();
@@ -498,20 +582,28 @@ class EmaChainToolkitExample
                 .withServiceName(SERVICE_NAME)
                 .withMaxDepth(2)
                 .onChainComplete(
-                        chain ->
-                                chain.getElements().forEach(
-                                    (position, name) ->
-                                        System.out.println("\t" + chain.getName() + position + " = " + name)
-                                )
+                    new RecursiveChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(RecursiveChain chain) {
+                            for (Map.Entry<List<Long>, List<String>> element : chain.getElements().entrySet()){
+                                List<Long> position = element.getKey();
+                                List<String> name = element.getValue();
+
+                                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+                            }
+                        }
+                    }
                 )
                 .onChainError(
-                        (errorMessage, chain) ->  
-                        {
-                            if(!chain.isAChain())
-                            {
-                                System.out.println("<" + chain.getName() + "> is not a chain");
+                        new RecursiveChain.ChainErrorFunction() {
+                            @Override
+                            public void onError(String errorMessage, RecursiveChain chain) {
+                                if(!chain.isAChain())
+                                {
+                                    System.out.println("<" + chain.getName() + "> is not a chain");
+                                }
+                                System.out.println("Error received for <" + chain.getName() + ">: " + errorMessage);
                             }
-                            System.out.println("Error received for <" + chain.getName() + ">: " + errorMessage);
                         }
                 )
                 .build();
@@ -542,8 +634,12 @@ class EmaChainToolkitExample
                 .withChainName("THIS_CHAIN_DOESNT_EXIST")
                 .withServiceName(SERVICE_NAME)
                 .onChainError(
-                        (errorMessage, chain) -> 
-                                System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -626,12 +722,13 @@ class EmaChainToolkitExample
             
         try
         {
-            LocalDateTime endTime = LocalDateTime.now().plusSeconds(durationInSeconds);
+            Date now = new Date();
+            Date endTime = new Date(now.getTime() + durationInSeconds * 1000);
             do
             {
                 ommConsumer.dispatch(DISPATCH_TIMEOUT_IN_MS);
             } 
-            while(LocalDateTime.now().isBefore(endTime));            
+            while(new Date().before(endTime));            
         } 
         catch (OmmException exception)
         {
@@ -666,4 +763,12 @@ class EmaChainToolkitExample
         catch (IOException exception)  
         {}  
     }    
+    
+    private static long dateDifferenceInSeconds(Date date1, Date date2)
+    {
+        long diff = date2.getTime() - date1.getTime();
+        long diffInSeconds = diff / 1000 % 60;
+        
+        return diffInSeconds;
+    }
 }

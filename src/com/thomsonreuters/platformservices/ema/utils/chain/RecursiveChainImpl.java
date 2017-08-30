@@ -205,13 +205,28 @@ class RecursiveChainImpl implements RecursiveChain
                     .withSummaryLinksToSkip(summaryLinksToSkipByDisplayTemplate)
                     .withNameGuessingOptimization(nameGuessesCount)
                     .onElementAdded (
-                            (position, name, chain) -> onLinkAdded(position, name, chain)
+                        new FlatChain.ElementAddedFunction() {
+                            @Override
+                            public void onElementAdded(long position, String name, FlatChain chain) {
+                                onLinkAdded(position, name, chain);
+                            }
+                        }
                     )
                     .onChainComplete(
-                            (chain)-> onComplete(chain)
+                        new FlatChain.ChainCompleteFunction() {
+                            @Override
+                            public void onComplete(FlatChain chain) {
+                                RecursiveChainImpl.this.onComplete(chain);
+                            }
+                        }
                     )
                     .onChainError(
-                            (errorMessage, chain) -> onError(errorMessage, chain)
+                        new FlatChain.ChainErrorFunction() {
+                            @Override
+                            public void onError(String errorMessage, FlatChain chain) {
+                                RecursiveChainImpl.this.onError(errorMessage, chain);
+                            }
+                        }
                     )
                     .build();      
         
@@ -227,13 +242,28 @@ class RecursiveChainImpl implements RecursiveChain
                     .withSummaryLinksToSkip(summaryLinksToSkipByDisplayTemplate)
                     .withMaxDepth(computeNextMaxDepth())
                     .onElementAdded(
-                            (position, name, chain) -> onSubLinkAdded(position, name, chain)
+                        new ElementAddedFunction() {
+                            @Override
+                            public void onElementAdded(List<Long> position, List<String> name, RecursiveChain chain) {
+                                onSubLinkAdded(position, name, chain);
+                            }
+                        }
                     )
                     .onChainComplete(
-                            (chain) -> onSubChainComplete(chain)
+                        new ChainCompleteFunction() {
+                            @Override
+                            public void onComplete(RecursiveChain chain) {
+                                onSubChainComplete(chain);
+                            }
+                        }
                     )
                     .onChainError(
-                            (errorMessage, chain) -> onSubChainError(errorMessage, chain)
+                        new ChainErrorFunction() {
+                            @Override
+                            public void onError(String errorMessage, RecursiveChain chain) {
+                                onSubChainError(errorMessage, chain);
+                            }
+                        }
                     )
                     .build();
 
@@ -250,7 +280,10 @@ class RecursiveChainImpl implements RecursiveChain
     private void closeSubChains()
     {
         Collection<RecursiveChain> subChains = positionsBySubChain.keySet();
-        subChains.forEach((subChain) -> subChain.close());
+        for(RecursiveChain subChain : subChains)
+        {
+            subChain.close();
+        }
         positionsBySubChain.clear();
     }
         
@@ -329,17 +362,16 @@ class RecursiveChainImpl implements RecursiveChain
 
         isComplete = true;
         Collection<RecursiveChain> subChains = positionsBySubChain.keySet();
-        subChains.forEach(
-                (subChain) -> {
-                    if(!subChain.isComplete())
-                    {
-                        isComplete = false;
-                    }
-                    else
-                    {
-                    }
-                }
-        );
+        for(RecursiveChain subChain : subChains)
+        {
+            if(!subChain.isComplete())
+            {
+                isComplete = false;
+            }
+            else
+            {
+            }
+        }
         
         if(isComplete)
         {

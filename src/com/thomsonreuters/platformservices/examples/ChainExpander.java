@@ -22,6 +22,7 @@ import com.thomsonreuters.platformservices.ema.utils.chain.Chain;
 import com.thomsonreuters.platformservices.ema.utils.chain.FlatChain;
 import static java.lang.System.exit;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -78,12 +79,20 @@ class ChainExpander
                 .withServiceName(serviceName)
                 .withNameGuessingOptimization(nbOfNamesToGuessForOptimization)
                 .onChainComplete(
-                    (chain) -> 
-                        printChain(chain)
+                    new FlatChain.ChainCompleteFunction() {
+                        @Override
+                        public void onComplete(FlatChain chain) {
+                            printChain(chain);
+                        }
+                    }
                 )
                 .onChainError(
-                    (errorMessage, chain) -> 
-                        System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
+                    new FlatChain.ChainErrorFunction() {
+                        @Override
+                        public void onError(String errorMessage, FlatChain chain) {
+                            System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage);
+                        }
+                    }
                 )
                 .build();
         
@@ -162,15 +171,15 @@ class ChainExpander
     
     private static void printChainInTextFormat(FlatChain chain)
     {
-        chain.getElements().forEach(
-            (position, name) ->
-            {
-                if(verboseMode) 
-                    System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
-                else
-                    System.out.println(name);
-            }
-        );      
+        for (Map.Entry<Long, String> element : chain.getElements().entrySet()){
+            Long position = element.getKey();
+            String name = element.getValue();
+
+            if(verboseMode) 
+                System.out.println("\t" + chain.getName() + "[" + position + "] = " + name);
+            else
+                System.out.println(name);
+        }
     }    
     
     private static void printChainInJsonFormat(FlatChain chain)
