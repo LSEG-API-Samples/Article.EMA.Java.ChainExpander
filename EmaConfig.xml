@@ -21,21 +21,11 @@
 			<GuaranteedOutputBuffers value="5000"/>
 			<ConnectionPingTimeout value="30000"/>
 			<TcpNodelay value="1"/>
-			<Host value="YOUR_TREP_ADS_ELEKTRON_IP_OR_HOSTNAME"/>
+			<Host value="YOUR-ADS-IP-OR-HOST-NAME-GOES-HERE"/>
 			<Port value="14002"/>
 			<XmlTraceToStdout value="0"/>
 		</Channel>
 	</ChannelList>
 </ChannelGroup>
-
-<DictionaryGroup>
-
-	<DictionaryList>
-		<Dictionary>
-			<Name value="Dictionary_1"/>
-			<DictionaryType value="DictionaryType::ChannelDictionary"/>
-		</Dictionary>		
-	</DictionaryList>
-</DictionaryGroup>
 
 </EmaConfig>

@@ -1,32 +1,33 @@
 <launch4jConfig>
   <headerType>console</headerType>
   <outfile>..\..\dist\chain-expander\chain-expander.exe</outfile>
-  <jar>..\..\dist\Article-EMA-Java-ChainExpander.jar</jar>
+  <jar>..\..\dist\ChainExpander.jar</jar>
   <classPath>
-    <mainClass>com.thomsonreuters.platformservices.examples.ChainExpander</mainClass>
-    <cp>..\..\dist\lib\ema.jar</cp>
-    <cp>..\..\dist\lib\upa.jar</cp>
-    <cp>..\..\dist\lib\upaValueAdd.jar</cp>
-    <cp>..\..\dist\lib\slf4j-api-1.7.12.jar</cp>
-    <cp>..\..\dist\lib\slf4j-jdk14-1.7.12.jar</cp>
-    <cp>..\..\dist\lib\commons-configuration-1.10.jar</cp>
-    <cp>..\..\dist\lib\commons-logging-1.2.jar</cp>
-    <cp>..\..\dist\lib\commons-lang-2.6.jar</cp>
-    <cp>..\..\dist\lib\org.apache.commons.collections.jar</cp>
-    <cp>..\..\dist\lib\commons-cli-1.4.jar</cp>
-    <cp>..\..\dist\lib\json-20160810.jar</cp>
+    <mainClass>com.thomsonreuters.platformservices.elektron.tools.chain.ChainExpander</mainClass>
+    <cp>..\..\ValueAddObjectsForEMA\dist\ValueAddObjectsForEMA.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\ema.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\lib\upa.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\upaValueAdd.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\slf4j-api-1.7.12.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\slf4j-jdk14-1.7.12.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\commons-configuration-1.10.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\commons-logging-1.2.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\commons-lang-2.6.jar</cp>
+    <cp>..\..\ValueAddObjectsForEMA\dist\org.apache.commons.collections.jar</cp>
+    <cp>..\..\lib\commons-cli-1.4.jar</cp>
+    <cp>..\..\lib\json-20160810.jar</cp>
   </classPath>
   <jre>
     <minVersion>1.8.0</minVersion>
     <opt>-Djava.util.logging.config.file=.\logging.properties</opt>
   </jre>
   <versionInfo>
-    <fileVersion>1.0.0.0</fileVersion>
-    <txtFileVersion>1.0.0.0</txtFileVersion>
+    <fileVersion>1.0.1.0</fileVersion>
+    <txtFileVersion>1.0.1.0</txtFileVersion>
     <fileDescription>Command line tool for expanding chains published by Thomson Reuters infrastructures (TREP or Elektron)</fileDescription>
     <copyright>text</copyright>
-    <productVersion>1.0.0.0</productVersion>
-    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productVersion>1.0.1.0</productVersion>
+    <txtProductVersion>1.0.1.0</txtProductVersion>
     <productName>chain-expander</productName>
     <companyName>Thomson Reuters</companyName>
     <internalName>chain-expander</internalName>

@@ -2,24 +2,29 @@
  * Copyright 2017 Thomson Reuters
  *
  * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating the "Decoding chains" article published on the 
- * Thomson Reuters Developer Community. It has not been tested for a usage in 
- * production environments.
+ * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * Community. It has not been tested for usage in production environments. 
+ * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * these objects or the related source code is used in production or any other 
+ * client environment.
  *
  * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
- * Decoding chains - Part 1: https://developers.thomsonreuters.com/article/elektron-article-1
- * Decoding chains - Part 2: https://developers.thomsonreuters.com/article/elektron-article-2
+ *
+ * Related Articles:
+ *   Simple Chain objects for EMA - Part 1: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-1
+ *   Simple Chain objects for EMA - Part 2: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-2
  *
  */
-package com.thomsonreuters.platformservices.examples;
+package com.thomsonreuters.platformservices.elektron.tools.chain;
 
 import com.thomsonreuters.ema.access.EmaFactory;
 import com.thomsonreuters.ema.access.OmmConsumer;
 import com.thomsonreuters.ema.access.OmmConsumerConfig;
 import static com.thomsonreuters.ema.access.OmmConsumerConfig.OperationModel.USER_DISPATCH;
 import com.thomsonreuters.ema.access.OmmException;
-import com.thomsonreuters.platformservices.ema.utils.chain.Chain;
-import com.thomsonreuters.platformservices.ema.utils.chain.FlatChain;
+import com.thomsonreuters.platformservices.elektron.objects.common.Dispatcher;
+import com.thomsonreuters.platformservices.elektron.objects.chain.Chain;
+import com.thomsonreuters.platformservices.elektron.objects.chain.FlatChain;
 import static java.lang.System.exit;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
@@ -31,9 +36,14 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.json.JSONObject;
 
+/**
+ * Main application class that implements the main method and the whole 
+ * application logic from the arguments interpretation to the data output 
+ * in text or JSON format.
+ */
 class ChainExpander
 {
-    // TREP or Elektron Service name used request chains and tiles
+    // TREP or Elektron Service name used to request chains and tiles
     private static String serviceName = "ELEKTRON_DD";
     
     // Name of the chain to expand
@@ -53,10 +63,15 @@ class ChainExpander
 
     // The OmmConsumer used to request the chains
     private static OmmConsumer ommConsumer;
+    
+    // The OmmConsumer dispatcher
+    private static Dispatcher dispatcher;    
 
-    // Value of the timeout used by the event dispacthing loops
-    private static final int DISPATCH_TIMEOUT_IN_MS = 200;
-        
+    
+    /**
+     * Main application method
+     * @param args application arguments
+     */    
     public static void main(String[] args)
     {
         analyzeArguments(args);
@@ -67,21 +82,21 @@ class ChainExpander
         if(verboseMode) 
             System.out.println("  >>> Connecting to the infrastructure...");        
         
-        createOmmConsumer();
+        createOmmConsumerAndDispatcher();
         
         if(verboseMode) 
-            System.out.println("  >>> Expanding the chain. Please wait...");        
+            System.out.println("  >>> Expanding the chain <" + chainName + ">. Please wait...");        
         
         FlatChain theChain = new FlatChain.Builder()
                 .withOmmConsumer(ommConsumer)
                 .withChainName(chainName)
                 .withServiceName(serviceName)
                 .withNameGuessingOptimization(nbOfNamesToGuessForOptimization)
-                .onChainComplete(
+                .onComplete(
                     (chain) -> 
                         printChain(chain)
                 )
-                .onChainError(
+                .onError(
                     (errorMessage, chain) -> 
                         System.out.println("\tError received for <" + chain.getName() + ">: " + errorMessage)
                 )
@@ -96,7 +111,11 @@ class ChainExpander
         uninitializeOmmConsumer();
     }
     
-    private static void createOmmConsumer()
+   /**
+     * Creates the <code>OmmConsumer</code> and the <code>Dispatcher</code> used 
+     * by the application
+     */
+    private static void createOmmConsumerAndDispatcher()
     {
         if(ommConsumer != null)
             return;
@@ -104,7 +123,6 @@ class ChainExpander
         try
         {
             OmmConsumerConfig config = EmaFactory.createOmmConsumerConfig()
-                    .consumerName("Consumer_1")
                     .operationModel(USER_DISPATCH);
             
             if(!dacsUserName.isEmpty())
@@ -113,15 +131,21 @@ class ChainExpander
             }
             
             ommConsumer = EmaFactory.createOmmConsumer(config);
+            
+            dispatcher = new Dispatcher.Builder()
+                                .withOmmConsumer(ommConsumer)
+                                .build();
         } 
         catch (OmmException exception)
         {
             System.out.println("      ERROR - Can't create the OmmConsumer because of the following error: " + exception.getMessage());
             exit(-1);
-        }                
-            
-    }
+        }                        
+    }    
     
+    /**
+     * Uninitialize the <code>OmmConsumer</code>.
+     */
     private static void uninitializeOmmConsumer()
     {
         if(ommConsumer != null)
@@ -135,19 +159,19 @@ class ChainExpander
     {
         try
         {
-            do
-            {
-                ommConsumer.dispatch(DISPATCH_TIMEOUT_IN_MS);
-            } 
-            while (!chain.isComplete());
+            dispatcher.dispatchEventsUntilComplete(chain);
         } 
         catch (OmmException exception)
         {
             System.out.println("      ERROR - OmmConsumer event dispatching failed: " + exception.getMessage());
             exit(-1);
-        }                
+        }                        
     }
     
+    /**
+     * Prints the chain
+     * @param chain the <code>FlatChain</code> to print
+     */    
     private static void printChain(FlatChain chain)
     {
         if(jsonOutputMode)
@@ -160,6 +184,10 @@ class ChainExpander
         }
     }
     
+    /**
+     * Print the <code>FlatChain</code> in text format.
+     * @param chain the <code>FlatChain</code> to print
+     */     
     private static void printChainInTextFormat(FlatChain chain)
     {
         chain.getElements().forEach(
@@ -173,6 +201,11 @@ class ChainExpander
         );      
     }    
     
+        
+    /**
+     * Print the <code>FlatChain</code> in JSON format.
+     * @param chain the <code>FlatChain</code> to print
+     */ 
     private static void printChainInJsonFormat(FlatChain chain)
     {
         JSONObject json = new JSONObject();
@@ -182,6 +215,10 @@ class ChainExpander
         System.out.println(json);
     }
     
+    /**
+     * Analyze application's arguments
+     * @param args the arguments to analyse
+     */
     private static void analyzeArguments(String[] args)
     {        
         String syntax = "chain-expander [-nv] [-o] [-s service-name] [-u user-name] chain-name";
@@ -261,6 +298,9 @@ class ChainExpander
         }
     }    
     
+    /**
+     * Display the application's arguments and options.
+     */
     private static void displayParameters()
     {
         System.out.println();
@@ -279,6 +319,10 @@ class ChainExpander
         if(verboseMode)
         {
             System.out.println("\tnon-verbose     : disabled");       
+        }
+        else
+        {
+            System.out.println("\tnon-verbose     : enabled");
         }
         if(jsonOutputMode)
         {

@@ -1,6 +1,4 @@
 ﻿# ChainExpander example
-Version 1.0 - Last Update Apr 28 2017
-
 
 ## Table of Content
 
@@ -12,57 +10,56 @@ Version 1.0 - Last Update Apr 28 2017
 
 * [Applications design](#application-design)
 
-* [Building the *ChainExpander* and *EmaChainToolkitExample* applications](#building-the-chainexpander)
+* [Building the _ChainExpander_ and the _ElektronObjects example SDK_](#building-the-chainexpander)
 
-* [Running the *ChainExpander*](#running-the-chainexpander)
+* [Running the _ChainExpander_](#running-the-chainexpander)
 
-* [Running the *EmaChainToolkitExample*](#running-the-ema-chain-toolkit-example)
+* [Running the _ChainStepByStepExample_](#running-the-chainstepbystepexample)
 
 * [Troubleshooting](#troubleshooting)
 
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-This project is one of the many learning materials published by Thomson Reuters to help developers learning Thomson Reuters APIs. It contains two Java example applications that demonstrate the different concepts explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article published on the [Thomson Reuters Developer Community portal](https://developers.thomsonreuters.com). These applications are based on the Java edition of the Elektron Message API that is one of the APIs of the Thomson Reuters Elektron SDK. Please consult this [Elektron SDK page](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) for more learning materials and documentation about this API.
+This project is one of the many learning materials published by Thomson Reuters to help developers learning Thomson Reuters APIs. It contains two Java example applications and the _ValueAddObjectsForEMA_ example library that demonstrate the different concepts explained in the [Simple Chain objects for EMA](https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-1) article published on the [Thomson Reuters Developer Community portal](https://developers.thomsonreuters.com). These applications are based on the Java edition of the Elektron Message API that is one of the APIs of the Thomson Reuters Elektron SDK. Please consult this [Elektron SDK page](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) for learning materials and documentation about this API.
 
-For any question related to this article please use the Developer Community [Q&A Forum](https://community.developers.thomsonreuters.com).
+For any question or comment related to this article please use the _ADD YOUR COMMENT_ section at the bottom of this page or post a question on the [EMA Q&A Forum](https://community.developers.thomsonreuters.com/spaces/72/index.html) of the Developer Community.
 
-***Note:** To be able to ask questions and to benefit from the full content available on the [TR Developer Community portal](https://developers.thomsonreuters.com) we recommend you to [register here]( https://developers.thomsonreuters.com/iam/register) or [login here]( https://developers.thomsonreuters.com/iam/login?destination_path=Lw%3D%3D).*
+_**Note:** To be able to ask questions and to benefit from the full content available on the [TR Developer Community portal](https://developers.thomsonreuters.com) we recommend you to [register here](https://login.thomsonreuters.com/iamui/UI/createUser?app_id=DevPlatform&realm=DevPlatform) or [login here]( https://developers.thomsonreuters.com/iam/login?destination_path=Lw%3D%3D)._
 
 ## <a id="disclaimer"></a>Disclaimer
-The source code presented in this project has been written by Thomson Reuters for the only purpose of illustrating the *Decoding chains* articles [part 1](https://developers.thomsonreuters.com/article/elektron-article-1) and [part 2](https://developers.thomsonreuters.com/article/elektron-article-1) published on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com). It has not been tested for a usage in production environments.
+The example applications presented here and the _ValueAddObjectsForEMA_ example library have been written by Thomson Reuters for the only purpose of illustrating articles published on the Thomson Reuters Developer Community. These example applications and the _ValueAddObjectsForEMA_ example library have not been tested for a usage in production environments. Thomson Reuters cannot be held responsible for any issues that may happen if these example applications, the _ValueAddObjectsForEMA_ library or the related source code is used in production or any other client environment.
 
 ## <a id="prerequisites"></a>Prerequisites
 
 Required software components:
 
-* [Elektron Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) (1.0.8 or greater) - Thomson Reuters interface to the Elektron Market Data environment
+* [Elektron Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) (1.1.0 or greater) - Thomson Reuters interface to the Elektron Market Data environment
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
 ## <a id="application-design"></a> Applications design
 The source code of these example applications has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
-### The *EMAChainToolkit*
-This module implements the complete chain decoding logic and algorithms explained in the [Decoding chains - Part 1](https://developers.thomsonreuters.com/article/elektron-article-1) article. These features have been isolated in the EMA Chain Toolkit that is contained in the com.thomsonreuters.platformservices.ema.utils.chain package. The source code of this package is reused by other Thomson Reuters example applications. 
+### The *_ValueAddObjectsForEMA_* library
+This module implements the complete logic and algorithms explained in the [Simple Chain objects for EMA - Part1](https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-1) article. These features are implemented by the _Chain_ objects defined by the _com.thomsonreuters.platformservices.elektron.objects.chain_ package. The source code of this package is reused by other Thomson Reuters example applications. The *_ValueAddObjectsForEMA_* example library provides other reusable objects presented by other articles published on the Thomson Reuters Developer Community.   
 
-For more details about the EMA Chain Toolkit usage, please refer to the [Decoding Chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2) article and the EMA Chain Toolkit [javadoc](https://developers.thomsonreuters.com/sites/default/files/article_content_files/EmaChainToolkit-Javadoc.zip). 
+For more details about the _Chain_ objects usage, please refer to the [Simple Chain objects for EMA - Part2](https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-2) article and the *_ValueAddObjectsForEMA_* javadoc. 
 
+### The _ChainStepByStepExample_ application
+This example application that is part of the *_ValueAddObjectsForEMA_* library demonstrates the Chain objects capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it in with Chain objects in several individual steps that demonstrate the implemented features. Before each step, explanatory text is displayed and you are prompted to press to start the step.
 
-### The *EmaChainToolkitExample* application
+### The _ChainExpander_ tool
 
-This is an example application that demonstrates the EMA Chain Toolkit capabilities and how to use them. The application starts by creating an EMA OmmConsumer and uses it with the toolkit to expand different kinds of chains. Chain examples are expanded one by one in 10 individual steps.  Before each step, explanatory text is displayed and you are prompted to press <Enter> to start the step.
+The _ChainExpander_ is a command line tool you can use to expand a flat chain from the command line. When the expansion is done, chain elements names are simply displayed on the output either in text or JSON format. The application accepts options and arguments that allow you to set the chain name, the service name and the DACS user name. You can also activate the optimization for long chains or even switch the application to a non verbose mode and redirect the output (the chain elements) to a file so that it can be processed by another application or script. This is a good example of a simple but real application that relies on the _ValueAddObjectsForEMA_ library and the _FlatChain_ class.
 
-The *EmaChainToolkitExample* application also implements utility methods that are used to dispatch the OmmConsumer in different situations: until a chain is complete, until the user presses <Enter> or until a certain amount of time is elapsed.
+## <a id="building-the-chainexpander" name="building-the-chainexpander"></a>Building the _ChainExpander_ and the _ValueAddObjectsForEMA_
 
-For more details about the *EmaChainToolkitExample* application please refer to the [Decoding chains - Part 2](https://developers.thomsonreuters.com/article/elektron-article-2#the-emachaintoolkitexample-application) article. 
+### Make sure the _ValueAddObjectsForEMA_ submodule is downloaded
 
-**Note:** If you do not know yet about the Elektron Message API (EMA) and how to program and EMA consumer application I recommend you to follow this [EMA Quick Start](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/quick-start?content=8656&type=quick_start) and these [EMA Tutorials](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/learning).
+Before you start building the project make sure the _ValueAddObjectsForEMA_ submodule is properly downloaded. To this aim list the files of the _./ValueAddObjectsForEMA_ directory. This directory should contain several script and source files. If it's empty, please run the following Git commands in the root directory of your _ChainExpander_ project: 
 
-### The *ChainExpander* command line tool
-
-This example application allows you to expand a flat chain from the command line. When the expansion is done, chain elements names are simply displayed on the output either in text or JSON format. The application accepts options and arguments that allow you to set the chain name, the service name and the DACS user name. You can also activate the optimization for long chains or even switch the application to a non verbose mode and redirect the output (the chain elements) to a file so that it can be processed by another application or script.
-
-## <a id="building-the-chainexpander"></a>Building the *ChainExpander* and *EmaChainToolkitExample* applications
+    git submodule init
+    git submodule update
 
 ### Set the required environment variables
 
@@ -72,16 +69,18 @@ This package includes some convenient files which will enable the developer to q
 
 ### Change the service name and DACS user name if need be
 
-The *EmaChainToolkitExample.java* file contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
+The *ChainStepByStepExample.java* file of the *_ValueAddObjectsForEMA_* contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
 
-* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *EmaChainToolkitExample.serviceName* field at line 22 of *EmaChainToolkitExample.java*.  
-* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *EmaChainToolkitExample.dacsUserName* field at line 30 of *EmaChainToolkitExample.java*.
+* The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed thanks to the *ChainStepByStepExample.serviceName* class member in the *ChainStepByStepExample.java* file.  
+* The **DACS user name** used to connect the application to the infrastructure. If the Data Access Control System (DACS) is activated on your TREP and if your DACS username is different than your operating system user name, you will need to set it thanks to the *ChainStepByStepExample.dacsUserName* class member of the *ChainStepByStepExample.java* file.
+
+The _ChainExpander_ application doesn't need these changes as the **service name** and the  **DACS user name** can be passed as command line arguments of the application.
 
 ### Run the *build* script
 
-Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the *ChainExpander* and *EmaChainToolkitExample* applications.
+Once these environment variables setup and hardcoded values are properly set, you must run the *build.bat* or the *build.ksh* script to build the _ValueAddObjectsForEMA_ and the _ChainExpander_ application.
 
-**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applicaitons source code.    
+**Note:** Alternatively to the build scripts, you can use the NetBeans IDE to build the applications. NetBeans 8.2 project files are provided with the applications source code.    
 
 ## <a id="running-the-chainexpander"></a>Running the *ChainExpander*
 
@@ -159,458 +158,10 @@ This is an example of the *ChainExpander* output:
             0#.DJI[29] = WMT.N
             0#.DJI[30] = XOM.N
 
-## <a id="running-the-ema-chain-toolkit-example"></a>Running the *EmaChainToolkitExample*
 
-**Before you start the application** you must configure the *EmaConfig.xml file* to specify the host name of the server (the TREP or Elektron platform) to which the EMA connects. This is set thanks to the value of the *\<ChannelGroup>\<ChannelList>\<Channel>\<Host>* node. This value can be a remote host name or IP address.
+## <a id="running-the-chainstepbystepexample"></a>Running the _ChainStepByStepExample_
 
-To start the *EmaChainToolkitExample* run the *ema-chain-toolkit-example.bat* or the *ema-chain-toolkit-example.ksh* script. These scripts depend on the *JAVA_HOME* and *ELEKTRON_JAVA_HOME* environment variables that must have been defined for the build scripts.
-
-### Expected output
-
-This is an example of the *EmaChainToolkitExample* output for each step:
-
-    -------------------------------------------------------------------------------
-    |                                                                             |
-    |                    EMA Chain toolkit example application                    |
-    |                                                                             |
-    | This example application illustrates the concepts explained in the          |
-    | "Decoding chains with the Elektron Message API" article published on the    |
-    | Thomson Reuters Developer Portal. More specifically, this application       |
-    | demonstrates how to use the EMA chain toolkit that implements the different |
-    | concepts, algorithms and optimizations described in the article.            |
-    |                                                                             |
-    | The EMA chain toolkit is exposed by the com.thomsonreuters.platformservices |
-    | .ema.utils.chain package.                                                   |
-    | The application starts by creating an EMA OmmConsumer and uses it with the  |
-    | toolkit to expand a number of different chains, demonstrating the           |
-    | implemented capabilities. The chains are expanded one by one in 10          |
-    | individual steps. For each step an explanatory text is displayed and you    |
-    | are prompted to press <Enter> to start the step.                            |
-    -------------------------------------------------------------------------------
-
-
-      ..............................................................................
-      >>> Creating the OmmConsumer
-
-      ..............................................................................
-      . 1/10 - openAChainAndDisplayElementNamesWhenFinished_1()
-      ..............................................................................
-      . In this step we open the Dow Jones chain. When the chain decoding is
-      . completed we display the names of all elements that constitute this chain.
-      . We also display errors if any. In order to determine if the chain is
-      . complete we poll the isComplete() method at regular intervals (after each
-      . OMM consumer dispatch). In the next step we will see another technique to
-      . detect chains completion.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#.DJI>
-        >>> Dispathing events until the chain is complete or in error
-            0#.DJI[0] = .DJI
-            0#.DJI[1] = AAPL.OQ
-            0#.DJI[2] = AXP.N
-            0#.DJI[3] = BA.N
-            0#.DJI[4] = CAT.N
-            0#.DJI[5] = CSCO.OQ
-            0#.DJI[6] = CVX.N
-            0#.DJI[7] = DD.N
-            0#.DJI[8] = DIS.N
-            0#.DJI[9] = GE.N
-            0#.DJI[10] = GS.N
-            0#.DJI[11] = HD.N
-            0#.DJI[12] = IBM.N
-            0#.DJI[13] = INTC.OQ
-            0#.DJI[14] = JNJ.N
-            0#.DJI[15] = JPM.N
-            0#.DJI[16] = KO.N
-            0#.DJI[17] = MCD.N
-            0#.DJI[18] = MMM.N
-            0#.DJI[19] = MRK.N
-            0#.DJI[20] = MSFT.OQ
-            0#.DJI[21] = NKE.N
-            0#.DJI[22] = PFE.N
-            0#.DJI[23] = PG.N
-            0#.DJI[24] = TRV.N
-            0#.DJI[25] = UNH.N
-            0#.DJI[26] = UTX.N
-            0#.DJI[27] = V.N
-            0#.DJI[28] = VZ.N
-            0#.DJI[29] = WMT.N
-            0#.DJI[30] = XOM.N
-        >>> Closing <0#.DJI>
-
-      ..............................................................................
-      . 2/10 - openAChainAndDisplayElementNamesWhenFinished_2()
-      ..............................................................................
-      . In this step we open the Dow Jones chain and display its elements names
-      . when the chain is complete. This step displays the exact same information
-      . than the previous one, but this time we use another technique to detect the
-      . chain’s completion: we leverage the ChainCompleteFunction that is called as
-      . soon as the chain is complete (no is polling required).
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#.DJI>
-        >>> Dispathing events until the chain is complete or in error
-            0#.DJI[0] = .DJI
-            0#.DJI[1] = AAPL.OQ
-            0#.DJI[2] = AXP.N
-            0#.DJI[3] = BA.N
-            0#.DJI[4] = CAT.N
-            0#.DJI[5] = CSCO.OQ
-            0#.DJI[6] = CVX.N
-            0#.DJI[7] = DD.N
-            0#.DJI[8] = DIS.N
-            0#.DJI[9] = GE.N
-            0#.DJI[10] = GS.N
-            0#.DJI[11] = HD.N
-            0#.DJI[12] = IBM.N
-            0#.DJI[13] = INTC.OQ
-            0#.DJI[14] = JNJ.N
-            0#.DJI[15] = JPM.N
-            0#.DJI[16] = KO.N
-            0#.DJI[17] = MCD.N
-            0#.DJI[18] = MMM.N
-            0#.DJI[19] = MRK.N
-            0#.DJI[20] = MSFT.OQ
-            0#.DJI[21] = NKE.N
-            0#.DJI[22] = PFE.N
-            0#.DJI[23] = PG.N
-            0#.DJI[24] = TRV.N
-            0#.DJI[25] = UNH.N
-            0#.DJI[26] = UTX.N
-            0#.DJI[27] = V.N
-            0#.DJI[28] = VZ.N
-            0#.DJI[29] = WMT.N
-            0#.DJI[30] = XOM.N
-        >>> Closing <0#.DJI>
-
-      ..............................................................................
-      . 3/10 - openAChainAndDisplayElementsNamesAsSoonAsTheyAreDetected()
-      ..............................................................................
-      . In this step we open the Dow Jones chain and display the name of new
-      . elements as soon as they are detected by the decoding algorithm. To this
-      . aim we leverage the ElementAddedFunction functional interface.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#.DJI>
-        >>> Dispathing events until the chain is complete or in error
-            Element added to <0#.DJI> at position 0: .DJI
-            Element added to <0#.DJI> at position 1: AAPL.OQ
-            Element added to <0#.DJI> at position 2: AXP.N
-            Element added to <0#.DJI> at position 3: BA.N
-            Element added to <0#.DJI> at position 4: CAT.N
-            Element added to <0#.DJI> at position 5: CSCO.OQ
-            Element added to <0#.DJI> at position 6: CVX.N
-            Element added to <0#.DJI> at position 7: DD.N
-            Element added to <0#.DJI> at position 8: DIS.N
-            Element added to <0#.DJI> at position 9: GE.N
-            Element added to <0#.DJI> at position 10: GS.N
-            Element added to <0#.DJI> at position 11: HD.N
-            Element added to <0#.DJI> at position 12: IBM.N
-            Element added to <0#.DJI> at position 13: INTC.OQ
-            Element added to <0#.DJI> at position 14: JNJ.N
-            Element added to <0#.DJI> at position 15: JPM.N
-            Element added to <0#.DJI> at position 16: KO.N
-            Element added to <0#.DJI> at position 17: MCD.N
-            Element added to <0#.DJI> at position 18: MMM.N
-            Element added to <0#.DJI> at position 19: MRK.N
-            Element added to <0#.DJI> at position 20: MSFT.OQ
-            Element added to <0#.DJI> at position 21: NKE.N
-            Element added to <0#.DJI> at position 22: PFE.N
-            Element added to <0#.DJI> at position 23: PG.N
-            Element added to <0#.DJI> at position 24: TRV.N
-            Element added to <0#.DJI> at position 25: UNH.N
-            Element added to <0#.DJI> at position 26: UTX.N
-            Element added to <0#.DJI> at position 27: V.N
-            Element added to <0#.DJI> at position 28: VZ.N
-            Element added to <0#.DJI> at position 29: WMT.N
-            Element added to <0#.DJI> at position 30: XOM.N
-        >>> Closing <0#.DJI>
-
-      ..............................................................................
-      . 4/10 - openAChainAndSkipSummaryLinks()
-      ..............................................................................
-      . In this step we open the Dow Jones chain once again, but this time we skip
-      . the summary links. As the Dow Jones chain as one summary link, the chain 
-      . will be made of 30 elements instead of 31. The number of summary links may
-      . be different for other chains and depends on the display template used by
-      . the chain. For example, it's 2 for the British FTSE 100 (0#.FTSE), 6 for
-      . the Italian FTSE 100 (0#.FTMIB) and 6 for the French CAC40 (0#.FCHI).
-      . The SummaryLinksToSkip object used in this method is setup for these 4
-      . cases.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#.DJI>
-        >>> Dispathing events until the chain is complete or in error
-            0#.DJI[0] = AAPL.OQ
-            0#.DJI[1] = AXP.N
-            0#.DJI[2] = BA.N
-            0#.DJI[3] = CAT.N
-            0#.DJI[4] = CSCO.OQ
-            0#.DJI[5] = CVX.N
-            0#.DJI[6] = DD.N
-            0#.DJI[7] = DIS.N
-            0#.DJI[8] = GE.N
-            0#.DJI[9] = GS.N
-            0#.DJI[10] = HD.N
-            0#.DJI[11] = IBM.N
-            0#.DJI[12] = INTC.OQ
-            0#.DJI[13] = JNJ.N
-            0#.DJI[14] = JPM.N
-            0#.DJI[15] = KO.N
-            0#.DJI[16] = MCD.N
-            0#.DJI[17] = MMM.N
-            0#.DJI[18] = MRK.N
-            0#.DJI[19] = MSFT.OQ
-            0#.DJI[20] = NKE.N
-            0#.DJI[21] = PFE.N
-            0#.DJI[22] = PG.N
-            0#.DJI[23] = TRV.N
-            0#.DJI[24] = UNH.N
-            0#.DJI[25] = UTX.N
-            0#.DJI[26] = V.N
-            0#.DJI[27] = VZ.N
-            0#.DJI[28] = WMT.N
-            0#.DJI[29] = XOM.N
-        >>> Closing <0#.DJI>
-
-      ..............................................................................
-      . 5/10 - openAVeryLongChain()
-      ..............................................................................
-      . In this step we open the NASDAQ BASIC chain that contains more than 8000 
-      . elements. This kind of chain may take more than 20 seconds to open with the
-      . normal decoding algorithm. For easier comparison with the optimized
-      . algorithm, the time spent to decode the chain is displayed.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#UNIVERSE.NB>
-        >>> Dispathing events until the chain is complete or in error
-            1 elements decoded for <0#UNIVERSE.NB>. Latest: A.NB
-            101 elements decoded for <0#UNIVERSE.NB>. Latest: ADMA.NB
-            201 elements decoded for <0#UNIVERSE.NB>. Latest: AGN_pa.NB
-            301 elements decoded for <0#UNIVERSE.NB>. Latest: ALL_pb.NB
-                .
-                .
-                .
-            8401 elements decoded for <0#UNIVERSE.NB>. Latest: ZLTQ.NB
-            Chain <0#UNIVERSE.NB> contains 8436 elements and opened in 31 seconds.
-        >>> Closing <0#UNIVERSE.NB>
-
-      ..............................................................................
-      . 6/10 - openAVeryLongChainWithTheOptimizedAlgorithm()
-      ..............................................................................
-      . In this step we open the NASDAQ BASIC chain with the optimized decoding
-      . algorithm. You should observe much better performance than with the normal
-      . algorithm.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#UNIVERSE.NB>
-        >>> Dispathing events until the chain is complete or in error
-            1 elements decoded for <0#UNIVERSE.NB>. Latest: A.NB
-            101 elements decoded for <0#UNIVERSE.NB>. Latest: ADMA.NB
-            201 elements decoded for <0#UNIVERSE.NB>. Latest: AGN_pa.NB
-            301 elements decoded for <0#UNIVERSE.NB>. Latest: ALL_pb.NB
-                .
-                .
-                .
-            8401 elements decoded for <0#UNIVERSE.NB>. Latest: ZLTQ.NB
-            Chain <0#UNIVERSE.NB> contains 8436 elements and opened in 1 seconds.
-        >>> Closing <0#UNIVERSE.NB>
-
-      ..............................................................................
-      . 7/10 - openChainWithUpdates()
-      ..............................................................................
-      . In this step we open the "NYSE Active Volume leaders" tile (.AV.O), this
-      . type of chain that updates very frequently. Tiles follow the same naming
-      . convention than classical chains, except for the name of their first chain
-      . record that doesn't start by "0#". This example leverages the
-      . ElementAddedFunction, ElementChangedFunction and ElementRemovedFunction
-      . functional interfaces to display chain changes. For this step, EMA events
-      . are displayed for 2 minutes. In order to help you visualizing the changes
-      . that happened to the chain, the complete list of chain elements is
-      . displayed when the chain is complete and just before it is closed, after
-      . the 2 minutes wait. If this step is executed when the NYSE is opened, you
-      . should observe changes in the chain.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <.AV.O>
-        >>> Dispatching events for 120 seconds
-        Element added to <.AV.O> at position 0: AMD.O
-        Element added to <.AV.O> at position 1: QQQ.O
-        Element added to <.AV.O> at position 2: FNSR.O
-        Element added to <.AV.O> at position 3: INTC.O
-        Element added to <.AV.O> at position 4: DRYS.O
-        Element added to <.AV.O> at position 5: USLV.O
-        Element added to <.AV.O> at position 6: TVIX.O
-        Element added to <.AV.O> at position 7: FB.O
-        Element added to <.AV.O> at position 8: NVDA.O
-        Element added to <.AV.O> at position 9: OCRX.O
-        Element added to <.AV.O> at position 10: OPK.O
-        Element added to <.AV.O> at position 11: AUPH.O
-        Element added to <.AV.O> at position 12: TSLA.O
-        Element added to <.AV.O> at position 13: CERU.O
-        Element added to <.AV.O> at position 14: RADA.O
-        Element added to <.AV.O> at position 15: VCEL.O
-        Element added to <.AV.O> at position 16: SRRA.O
-        Element added to <.AV.O> at position 17: CERC.O
-        Element added to <.AV.O> at position 18: GNMX.O
-        Element added to <.AV.O> at position 19: PAAS.O
-        Element added to <.AV.O> at position 20: ZSAN.O
-        Element added to <.AV.O> at position 21: MYL.O
-        Element added to <.AV.O> at position 22: UGLD.O
-        Element added to <.AV.O> at position 23: GOLD.O
-        Element added to <.AV.O> at position 24: AAPL.O
-
-        The chain is complete and contains the following elements:
-            .AV.O[0] = AMD.O
-            .AV.O[1] = QQQ.O
-            .AV.O[2] = FNSR.O
-            .AV.O[3] = INTC.O
-            .AV.O[4] = DRYS.O
-            .AV.O[5] = USLV.O
-            .AV.O[6] = TVIX.O
-            .AV.O[7] = FB.O
-            .AV.O[8] = NVDA.O
-            .AV.O[9] = OCRX.O
-            .AV.O[10] = OPK.O
-            .AV.O[11] = AUPH.O
-            .AV.O[12] = TSLA.O
-            .AV.O[13] = CERU.O
-            .AV.O[14] = RADA.O
-            .AV.O[15] = VCEL.O
-            .AV.O[16] = SRRA.O
-            .AV.O[17] = CERC.O
-            .AV.O[18] = GNMX.O
-            .AV.O[19] = PAAS.O
-            .AV.O[20] = ZSAN.O
-            .AV.O[21] = MYL.O
-            .AV.O[22] = UGLD.O
-            .AV.O[23] = GOLD.O
-            .AV.O[24] = AAPL.O
-        Waiting for updates...
-
-        Element changed in <.AV.O> at position 1
-            Previous name: QQQ.O New name: INTC.O
-        Element changed in <.AV.O> at position 2
-            Previous name: FNSR.O New name: QQQ.O
-        Element changed in <.AV.O> at position 3
-            Previous name: INTC.O New name: FNSR.O
-
-        The chain is about to be closed. It now contains the following elements:
-            .AV.O[0] = AMD.O
-            .AV.O[1] = INTC.O
-            .AV.O[2] = QQQ.O
-            .AV.O[3] = FNSR.O
-            .AV.O[4] = DRYS.O
-            .AV.O[5] = USLV.O
-            .AV.O[6] = TVIX.O
-            .AV.O[7] = FB.O
-            .AV.O[8] = NVDA.O
-            .AV.O[9] = OCRX.O
-            .AV.O[10] = OPK.O
-            .AV.O[11] = AUPH.O
-            .AV.O[12] = TSLA.O
-            .AV.O[13] = CERU.O
-            .AV.O[14] = RADA.O
-            .AV.O[15] = VCEL.O
-            .AV.O[16] = SRRA.O
-            .AV.O[17] = CERC.O
-            .AV.O[18] = GNMX.O
-            .AV.O[19] = PAAS.O
-            .AV.O[20] = ZSAN.O
-            .AV.O[21] = MYL.O
-            .AV.O[22] = UGLD.O
-            .AV.O[23] = GOLD.O
-            .AV.O[24] = AAPL.O
-
-        >>> Closing <.AV.O>
-
-      ..............................................................................
-      . 8/10 - openARecursiveChain()
-      ..............................................................................
-      . In this step we open the chain for the Equity Japanese Contracts (0#JP-EQ).
-      . This chain contains elements that are also chains. In this step we use a 
-      . RecursivesChain object to open all elements of this chain of chains 
-      . recursively. With recursive chains, the position is represented by a list
-      . of numbers (Each number representing a position at a given depth).
-      . The element name is made of a list of strings (Each string representing
-      . the name of the element at a given level).
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#JP-EQ>
-        >>> Dispathing events until the chain is complete or in error
-            0#JP-EQ[0] = [.TOPXC]
-            0#JP-EQ[1, 0] = [.TSEI, .TOPX]
-            0#JP-EQ[1, 1] = [.TSEI, .TSI2]
-            0#JP-EQ[1, 2] = [.TSEI, .MTHR]
-            0#JP-EQ[1, 3] = [.TSEI, .TSIL]
-            0#JP-EQ[1, 4] = [.TSEI, .TSIM]
-            0#JP-EQ[1, 5] = [.TSEI, .TSIS]
-            0#JP-EQ[1, 6] = [.TSEI, .TOPXC]
-            0#JP-EQ[1, 7] = [.TSEI, .TOPXL]
-                .
-                .
-                .
-            0#JP-EQ[5, 11, 27] = [0#JP-INDICES, .TSEK, .IBNKS.T]
-            0#JP-EQ[5, 11, 28] = [0#JP-INDICES, .TSEK, .ISECU.T]
-            0#JP-EQ[5, 11, 29] = [0#JP-INDICES, .TSEK, .IINSU.T]
-            0#JP-EQ[5, 11, 30] = [0#JP-INDICES, .TSEK, .IFINS.T]
-            0#JP-EQ[5, 11, 31] = [0#JP-INDICES, .TSEK, .IRLTY.T]
-            0#JP-EQ[5, 11, 32] = [0#JP-INDICES, .TSEK, .ISVCS.T]
-            0#JP-EQ[5, 12] = [0#JP-INDICES, .TSA1]
-            0#JP-EQ[5, 13] = [0#JP-INDICES, .TSA2]
-        >>> Closing <0#JP-EQ>
-
-      ..............................................................................
-      . 9/10 - openARecursiveChainWithMaxDepth()
-      ..............................................................................
-      . In this step we recursively open the chain for the Equity Japanese
-      . Contracts (0#JP-EQ) and we limit the recursion depth to 2 levels.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <0#JP-EQ>
-        >>> Dispathing events until the chain is complete or in error
-            0#JP-EQ[0] = [.TOPXC]
-            0#JP-EQ[1, 0] = [.TSEI, .TOPX]
-            0#JP-EQ[1, 1] = [.TSEI, .TSI2]
-            0#JP-EQ[1, 2] = [.TSEI, .MTHR]
-            0#JP-EQ[1, 3] = [.TSEI, .TSIL]
-            0#JP-EQ[1, 4] = [.TSEI, .TSIM]
-            0#JP-EQ[1, 5] = [.TSEI, .TSIS]
-            0#JP-EQ[1, 6] = [.TSEI, .TOPXC]
-            0#JP-EQ[1, 7] = [.TSEI, .TOPXL]
-                .
-                .
-                .
-            0#JP-EQ[5, 11] = [0#JP-INDICES, .TSEK]
-            0#JP-EQ[5, 12] = [0#JP-INDICES, .TSA1]
-            0#JP-EQ[5, 13] = [0#JP-INDICES, .TSA2]
-        >>> Closing <0#JP-EQ>
-
-      ..............................................................................
-      . 10/10 - openAChainThatDoesntExist()
-      ..............................................................................
-      . In this step we try to open a chain that doesn't exist and display the 
-      . error detected by the decoding algorithm.
-
-        <<< Press <Enter> to continue...
-
-        >>> Opening <THIS_CHAIN_DOESNT_EXIST>
-        >>> Dispathing events until the chain is complete or in error
-            Error received for <THIS_CHAIN_DOESNT_EXIST>: Invalid status received for <THIS_CHAIN_DOESNT_EXIST>: Closed / Suspect / Not found / '*The record could not be found'
-        >>> Closing <THIS_CHAIN_DOESNT_EXIST>
-
-      ..............................................................................
-      >>> Uninitializing the OmmConsumer
-      >>> Exiting the application
+Please refer to the related [README](https://github.com/TR-API-Samples/Example.EMA.Java.ValueAddObjectsForEMA/blob/master/Chain-README.md) file of the _ValueAddObjectsForEMA_.
 
 ## <a id="troubleshooting"></a>Troubleshooting
 
@@ -694,7 +245,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ### <a id="authors"></a>Authors
 
-* **Olivier Davant** - Release 1.0.  *Initial version*
+* **Olivier Davant** - Release 1.1.  *ValueAddObjectsForEma Integration*
 
 ### <a id="license"></a>License
 
