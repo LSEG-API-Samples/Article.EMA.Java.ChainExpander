@@ -44,7 +44,7 @@ import org.json.JSONObject;
 class ChainExpander
 {
     // TREP or Elektron Service name used to request chains and tiles
-    private static String serviceName = "ELEKTRON_DD";
+    private static String serviceName = "ELEKTRON_EDGE";
     
     // Name of the chain to expand
     private static String chainName = "";
@@ -226,7 +226,7 @@ class ChainExpander
 
         Options options = new Options();
 
-        Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_DD");
+        Option serviceNameOption = new Option("s", "service-name", true, "Elektron or TREP service name\nDefault value: ELEKTRON_EDGE");
         serviceNameOption.setRequired(false);
         options.addOption(serviceNameOption);
 
@@ -247,8 +247,8 @@ class ChainExpander
         options.addOption(jsonOutputOption);
 
         String footer = "examples:\n" 
-                      + " chain-expander -nv -s ELEKTRON_DD 0#.DJI\n"
-                      + " chain-expander -nv -j -s ELEKTRON_DD 0#.FTSE";
+                      + " chain-expander -nv -s ELEKTRON_EDGE 0#.DJI\n"
+                      + " chain-expander -nv -j -s ELEKTRON_EDGE 0#.FTSE";
         
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();

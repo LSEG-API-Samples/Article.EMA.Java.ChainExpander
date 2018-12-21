@@ -11,6 +11,7 @@ rem
 set SCRIPT=%0
 set BINDIR=build\classes
 set DISTDIR=dist
+set ELEKTRON_SDK_VERSION=%1
 set VALUE_ADD_OBJECTS_FOR_EMA_HOME=./ValueAddObjectsForEMA
 
 set JAVAC="%JAVA_HOME%\bin\javac"
@@ -19,10 +20,10 @@ set JAR="%JAVA_HOME%\bin\jar"
 set CLASSPATH=%BINDIR%;%VALUE_ADD_OBJECTS_FOR_EMA_HOME%/dist/ValueAddObjectsForEMA.jar;lib/commons-cli-1.4.jar;lib/json-20160810.jar
 
 if not exist %VALUE_ADD_OBJECTS_FOR_EMA_HOME% goto :NO_SUBMODULE
-if not exist %VALUE_ADD_OBJECTS_FOR_EMA_HOME%\build.bat goto :NO_SUBMODULE
+if not exist %VALUE_ADD_OBJECTS_FOR_EMA_HOME%\build-with-esdk-%ELEKTRON_SDK_VERSION%.bat goto :NO_SUBMODULE
 
 cd ValueAddObjectsForEMA
-call build.bat
+call build-with-esdk-%ELEKTRON_SDK_VERSION%.bat
 cd ..
 
 if not exist %BINDIR% (mkdir %BINDIR%)

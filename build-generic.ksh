@@ -9,6 +9,7 @@
 
 BINDIR=build/classes
 DISTDIR=dist
+set ELEKTRON_SDK_VERSION=$1
 VALUE_ADD_OBJECTS_FOR_EMA_HOME=./ValueAddObjectsForEMA
 
 JAVAC=$JAVA_HOME/bin/javac
@@ -16,13 +17,13 @@ JAR=$JAVA_HOME/bin/jar
 
 CLASSPATH=$BINDIR:$VALUE_ADD_OBJECTS_FOR_EMA_HOME/dist/ValueAddObjectsForEMA.jar:lib/commons-cli-1.4.jar:lib/json-20160810.jar
 
-if [ ! -d "$VALUE_ADD_OBJECTS_FOR_EMA_HOME"  ||  ! -e "$VALUE_ADD_OBJECTS_FOR_EMA_HOME/build.ksh" ]; then
+if [ ! -d "$VALUE_ADD_OBJECTS_FOR_EMA_HOME"  ||  ! -e "$VALUE_ADD_OBJECTS_FOR_EMA_HOME/build-with-esdk-$ELEKTRON_SDK_VERSION.ksh" ]; then
   printf "The $VALUE_ADD_OBJECTS_FOR_EMA_HOME submodule is missing or incomplete.\n"
   exit -1
 fi
 
 cd $VALUE_ADD_OBJECTS_FOR_EMA_HOME
-build.ksh
+build-with-esdk-$ELEKTRON_SDK_VERSION.ksh
 cd ..
 
 if [ ! -d $BINDIR ]; then
