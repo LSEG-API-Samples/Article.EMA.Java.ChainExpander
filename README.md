@@ -41,7 +41,7 @@ Required software components:
 The source code of these example applications has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
 ### The *_ValueAddObjectsForEMA_* library
-This module implements the complete logic and algorithms explained in the [Simple Chain objects for EMA - Part1](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article. These features are implemented by the _Chain_ objects defined by the _com.refinitiv.platformservices.elektron.objects.chain_ package. The source code of this package is reused by other Refinitiv example applications. The *_ValueAddObjectsForEMA_* example library provides other reusable objects presented by other articles published on the Refinitiv Developer Community.   
+This module implements the complete logic and algorithms explained in the [Simple Chain objects for EMA - Part1](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article. These features are implemented by the _Chain_ objects defined by the _com.refinitiv.platformservices.rt.objects.chain_ package. The source code of this package is reused by other Refinitiv example applications. The *_ValueAddObjectsForEMA_* example library provides other reusable objects presented by other articles published on the Refinitiv Developer Community.   
 
 For more details about the _Chain_ objects usage, please refer to the [Simple Chain objects for EMA - Part2](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-2) article and the *_ValueAddObjectsForEMA_* javadoc. 
 
