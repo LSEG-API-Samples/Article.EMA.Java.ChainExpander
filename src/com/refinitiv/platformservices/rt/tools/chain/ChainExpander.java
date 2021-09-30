@@ -15,16 +15,16 @@
  *   Simple Chain objects for EMA - Part 2: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-2
  *
  */
-package com.refinitiv.platformservices.elektron.tools.chain;
+package com.refinitiv.platformservices.rt.tools.chain;
 
 import com.refinitiv.ema.access.EmaFactory;
 import com.refinitiv.ema.access.OmmConsumer;
 import com.refinitiv.ema.access.OmmConsumerConfig;
 import static com.refinitiv.ema.access.OmmConsumerConfig.OperationModel.USER_DISPATCH;
 import com.refinitiv.ema.access.OmmException;
-import com.refinitiv.platformservices.elektron.objects.common.Dispatcher;
-import com.refinitiv.platformservices.elektron.objects.chain.Chain;
-import com.refinitiv.platformservices.elektron.objects.chain.FlatChain;
+import com.refinitiv.platformservices.rt.objects.common.Dispatcher;
+import com.refinitiv.platformservices.rt.objects.chain.Chain;
+import com.refinitiv.platformservices.rt.objects.chain.FlatChain;
 import static java.lang.System.exit;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
