@@ -79,7 +79,7 @@ To start the *ChainExpander* run the *chain-expander.bat*. These scripts depend 
      -o,--optimization         Enables the optimized algorithm for opening
                                long chains. This is not appropriate for short
                                chains (less than 300 elements).
-     -s,--service-name <arg>   Elektron or TREP service name
+     -s,--service-name <arg>   Refinitiv Real-Time or RTDS (formerly TREP) service name
                                Default value: ELEKTRON_DD
      -u,--user-name <arg>      DACS user name
                                Default value: System user name
@@ -140,11 +140,11 @@ This is an example of the *ChainExpander* output:
 
 ## <a id="solution-code"></a>Solution Code
 
-The ChainExpander was developed using the [Elektron SDK Java API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) that is available for download [here](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/downloads).
+The ChainExpander was developed using the [Refinitiv Real-Time SDK Java API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) that is available for download [here](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/downloads).
 
 ### Built With
 
-* [Elektron Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java)
+* [Enterprise Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java)
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [NetBeans 8.2](https://netbeans.org/) - IDE for Java development
 
