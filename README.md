@@ -14,8 +14,6 @@
 
 * [Running the _ChainExpander_](#running-the-chainexpander)
 
-* [Running the _ChainStepByStepExample_](#running-the-chainstepbystepexample)
-
 * [Troubleshooting](#troubleshooting)
 
 * [Solution Code](#solution-code)
@@ -60,7 +58,7 @@ Before you start building the project make sure the _ValueAddObjectsForEMA_ subm
 
 ### Change the service name and DACS user name if need be
 
-The *ChainStepByStepExample.java* file of the *_ValueAddObjectsForEMA_* contains two hardcoded values that you may want to change depending on your the TREP or Elektron platform you use. These values indicate:
+*_ValueAddObjectsForEMA_* contains two hardcoded values that you may want to change depending on RTDS (formerly TREP) or Refinitiv Real-Time platform you use. These values indicate:
 
 * The **service name** used to subscribe to chains records: The hardcoded value is "ELEKTRON_DD". This value can be changed. 
 
