@@ -14,8 +14,6 @@
 
 * [Running the _ChainExpander_](#running-the-chainexpander)
 
-* [Troubleshooting](#troubleshooting)
-
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
