@@ -17,11 +17,11 @@
 * [Solution Code](#solution-code)
 
 ## <a id="overview"></a>Overview
-This project is one of the many learning materials published by Refinitiv to help developers learning Refinitiv APIs. It contains two Java example applications and the _ValueAddObjectsForEMA_ example library that demonstrate the different concepts explained in the [Simple Chain objects for EMA](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article published on the [Refinitiv Developer Community portal](https://developers.refinitiv.com). These applications are based on the Java edition of the Enterprise Message API that is one of the APIs of the Refinitiv Real-Time SDK. Please consult this [Refinitiv Real-Time SDK page](https://developers.refinitiv.com/elektron/elektron-sdk-java) for learning materials and documentation about this API.
+This project is one of the many learning materials published by Refinitiv to help developers learning Refinitiv APIs. It contains two Java example applications and the _ValueAddObjectsForEMA_ example library that demonstrate the different concepts explained in the [Simple Chain objects for EMA](https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-1) article published on the [Refinitiv Developer Community portal](https://developers.refinitiv.com). These applications are based on the Java edition of the Enterprise Message API that is one of the APIs of the Refinitiv Real-Time SDK. Please consult this [Refinitiv Real-Time SDK page](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) for learning materials and documentation about this API.
 
 For any question or comment related to this article please use the _ADD YOUR COMMENT_ section at the bottom of this page or post a question on the [EMA Q&A Forum](https://community.developers.refinitiv.com/spaces/72/index.html) of the Developer Community.
 
-_**Note:** To be able to ask questions and to benefit from the full content available on the [TR Developer Community portal](https://developers.refinitiv.com) we recommend you to [register here](https://login.refinitiv.com/iamui/UI/createUser?app_id=DevPlatform&realm=DevPlatform) or [login here]( https://developers.refinitiv.com/iam/login?destination_path=Lw%3D%3D)._
+_**Note:** To be able to ask questions and to benefit from the full content available on the [Refinitiv Developer Community portal](https://developers.refinitiv.com) we recommend you to [register here](https://developers.refinitiv.com/en/register)._
 
 ## <a id="disclaimer"></a>Disclaimer
 The example applications presented here and the _ValueAddObjectsForEMA_ example library have been written by Refinitiv for the only purpose of illustrating articles published on the Refinitiv Developer Community. These example applications and the _ValueAddObjectsForEMA_ example library have not been tested for a usage in production environments. Refinitiv cannot be held responsible for any issues that may happen if these example applications, the _ValueAddObjectsForEMA_ library or the related source code is used in production or any other client environment.
@@ -30,16 +30,16 @@ The example applications presented here and the _ValueAddObjectsForEMA_ example 
 
 Required software components:
 
-* [Enterprise Message API](https://developers.refinitiv.com/elektron/elektron-sdk-java) (2.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
+* [Enterprise Message API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) (2.0 or greater) - Refinitiv interface to the Refinitiv Real-Time Market Data environment
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit - version 8
 
 ## <a id="application-design"></a> Applications design
 The source code of these example applications has been designed for easy reuse in other example applications. It is made of three distinct parts:
 
 ### The *_ValueAddObjectsForEMA_* library
-This module implements the complete logic and algorithms explained in the [Simple Chain objects for EMA - Part1](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-1) article. These features are implemented by the _Chain_ objects defined by the _com.refinitiv.platformservices.rt.objects.chain_ package. The source code of this package is reused by other Refinitiv example applications. The *_ValueAddObjectsForEMA_* example library provides other reusable objects presented by other articles published on the Refinitiv Developer Community.   
+This module implements the complete logic and algorithms explained in the [Simple Chain objects for EMA - Part1]((https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-1) article. These features are implemented by the _Chain_ objects defined by the _com.refinitiv.platformservices.rt.objects.chain_ package. The source code of this package is reused by other Refinitiv example applications. The *_ValueAddObjectsForEMA_* example library provides other reusable objects presented by other articles published on the Refinitiv Developer Community.   
 
-For more details about the _Chain_ objects usage, please refer to the [Simple Chain objects for EMA - Part2](https://developers.refinitiv.com/article/simple-chain-objects-ema-part-2) article and the *_ValueAddObjectsForEMA_* javadoc. 
+For more details about the _Chain_ objects usage, please refer to the [Simple Chain objects for EMA - Part2]((https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-2) article and the *_ValueAddObjectsForEMA_* javadoc. 
 
 ### The _ChainExpander_ tool
 
@@ -140,11 +140,11 @@ This is an example of the *ChainExpander* output:
 
 ## <a id="solution-code"></a>Solution Code
 
-The ChainExpander was developed using the [Refinitiv Real-Time SDK Java API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java) that is available for download [here](https://developers.thomsonreuters.com/elektron/elektron-sdk-java/downloads).
+The ChainExpander was developed using the [Refinitiv Real-Time SDK Java API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java) that is available for download [here](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java/download).
 
 ### Built With
 
-* [Enterprise Message API](https://developers.thomsonreuters.com/elektron/elektron-sdk-java)
+* [Enterprise Message API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/rt-sdk-java)
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [NetBeans 8.2](https://netbeans.org/) - IDE for Java development
 
