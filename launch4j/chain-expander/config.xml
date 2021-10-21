@@ -3,7 +3,7 @@
   <outfile>..\..\dist\chain-expander\chain-expander.exe</outfile>
   <jar>..\..\dist\ChainExpander.jar</jar>
   <classPath>
-    <mainClass>com.thomsonreuters.platformservices.elektron.tools.chain.ChainExpander</mainClass>
+    <mainClass>com.refinitiv.platformservices.rt.tools.chain.ChainExpander</mainClass>
     <cp>..\..\ValueAddObjectsForEMA\dist\ValueAddObjectsForEMA.jar</cp>
     <cp>..\..\ValueAddObjectsForEMA\dist\ema.jar</cp>
     <cp>..\..\ValueAddObjectsForEMA\dist\lib\upa.jar</cp>
@@ -24,7 +24,7 @@
   <versionInfo>
     <fileVersion>1.0.1.0</fileVersion>
     <txtFileVersion>1.0.1.0</txtFileVersion>
-    <fileDescription>Command line tool for expanding chains published by Thomson Reuters infrastructures (TREP or Elektron)</fileDescription>
+    <fileDescription>Command line tool for expanding chains published by Refintiv services (RTDS or Elektron)</fileDescription>
     <copyright>text</copyright>
     <productVersion>1.0.1.0</productVersion>
     <txtProductVersion>1.0.1.0</txtProductVersion>
