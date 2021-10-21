@@ -1,18 +1,18 @@
 /*
- * Copyright 2017 Thomson Reuters
+ * Copyright 2021 Refinitiv
  *
- * DISCLAIMER: This source code has been written by Thomson Reuters for the only 
- * purpose of illustrating articles published on the Thomson Reuters Developer 
+ * DISCLAIMER: This source code has been written by Refinitiv for the only 
+ * purpose of illustrating articles published on the Refinitiv Developer 
  * Community. It has not been tested for usage in production environments. 
- * Thomson Reuters cannot be held responsible for any issues that may happen if 
+ * Refinitiv cannot be held responsible for any issues that may happen if 
  * these objects or the related source code is used in production or any other 
  * client environment.
  *
- * Thomson Reuters Developer Community: https://developers.thomsonreuters.com
+ * Refinitiv Developer Community: https://developers.refinitiv.com
  *
  * Related Articles:
- *   Simple Chain objects for EMA - Part 1: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-1
- *   Simple Chain objects for EMA - Part 2: https://developers.thomsonreuters.com/article/simple-chain-objects-ema-part-2
+ *   Simple Chain objects for EMA - Part 1: https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-1
+ *   Simple Chain objects for EMA - Part 2: https://developers.refinitiv.com/en/article-catalog/article/simple-chain-objects-ema-part-2
  *
  */
 package com.refinitiv.platformservices.rt.tools.chain;
@@ -43,7 +43,7 @@ import org.json.JSONObject;
  */
 class ChainExpander
 {
-    // TREP or Elektron Service name used to request chains and tiles
+    // RTDS or Elektron Service name used to request chains and tiles
     private static String serviceName = "ELEKTRON_EDGE";
     
     // Name of the chain to expand
